@@ -1,0 +1,9 @@
+.grainient-container {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    pointer-events: none;
+    z-index: -10;
+    overflow: hidden;
+    transform: translateZ(-100px)
+}

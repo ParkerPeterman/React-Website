@@ -1,0 +1,55 @@
+.cert-grid-container {
+  display: grid;
+  /* This creates the 2x2 grid */
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.cert-card {
+  background: rgba(255, 255, 255, 0.05); /* Glass effect */
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.cert-card:hover {
+  transform: translateY(-5x);
+}
+
+.cert-image {
+  height: 200px;
+  width: 100%;
+  background-size: contain; /* Shows the whole logo */
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-top: 1rem;
+}
+
+.cert-info {
+  padding: 1.5rem;
+  text-align: center;
+  color: white;
+}
+
+.cert-info h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.cert-info p {
+  opacity: 0.7;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* Responsive: Stack them on mobile */
+@media (max-width: 1000px) {
+  .cert-grid-container {
+    grid-template-columns: 1fr;
+  }
+}
