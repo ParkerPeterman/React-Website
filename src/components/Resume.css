@@ -1,0 +1,122 @@
+/* --- Core Container Styles --- */
+.resume {
+  display: block;
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+  color: var(--text-muted);
+}
+
+.resume h2 {
+  font-weight: 1000;
+  color: var(--text-main);
+  margin-bottom: -6px;
+}
+
+.resume hr {
+  border: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+  margin-bottom: 1.5rem;
+}
+
+.resume bold {
+  font-weight: bolder;
+  color: var(--text-main);
+}
+
+.resume-item {
+  margin-bottom: 1.5rem;
+}
+
+.resume-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+  color: var(--text-main);
+}
+
+.resume-title h3 {
+  margin: 0;
+}
+
+/* --- Animation Layout (Desktop) --- */
+.resume-section {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; 
+  padding: 2rem 0;
+}
+
+/* Initial States */
+.side-header {
+  opacity: 0;
+  transform: translateX(-100px);
+  transition: all 0.8s ease-out;
+}
+
+.side-content {
+  opacity: 0;
+  transform: translateX(100px);
+  transition: all 0.8s ease-out;
+  transition-delay: 0.2s; 
+}
+
+/* Animation Trigger Classes */
+.animate-left {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.animate-right {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ==========================================================================
+    RESUME MOBILE RESPONSIVENESS
+========================================================================== */
+
+@media (max-width: 768px) {
+  .resume {
+    padding: 15px 10px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .resume-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .resume-title span {
+    font-size: 0.85rem; 
+    opacity: 0.8;
+    margin-bottom: 8px;
+  }
+
+  /* CRITICAL FIX: Change horizontal animations to vertical on mobile */
+  /* This stops the elements from hanging off the side of the screen */
+  .side-header {
+    transform: translateY(30px); 
+  }
+
+  .side-content {
+    transform: translateY(30px);
+  }
+
+  .animate-left, .animate-right {
+    transform: translateY(0);
+  }
+
+  /* Keep lists from pushing text off the right side of the screen */
+  .resume-item ul {
+    padding-left: 20px;
+    padding-right: 10px;
+    margin-right: 0;
+    word-break: break-word; /* Prevents long links/words from breaking layout */
+  }
+}
