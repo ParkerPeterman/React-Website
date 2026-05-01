@@ -1,5 +1,6 @@
 .logoloop {
     position: relative;
+    margin: 15vh 0;
 
     /* 1. INCREASE HEIGHT: Change 60px to 100px or 120px */
     --logoloop-gap: 48px;
@@ -19,7 +20,7 @@
 
 @media (prefers-color-scheme: dark) {
     .logoloop {
-        --logoloop-fadeColorAuto: #020003; /* Matches your background */
+        --logoloop-fadeColorAuto: #000000; /* Matches your background */
     }
 }
 

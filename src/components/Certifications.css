@@ -1,14 +1,17 @@
 .cert-grid-container {
   display: grid;
   /* This creates the 2x2 grid */
-  grid-template-columns: repeat(2, 1fr); 
+  grid-template-columns: repeat(2, auto); 
   gap: 2rem;
   padding: 2rem;
   max-width: 1000px;
   margin: 0 auto;
+  align-items: center;
+  justify-content: center;
 }
 
 .cert-card {
+  width: 40vw;
   background: rgba(255, 255, 255, 0.05); /* Glass effect */
   backdrop-filter: blur(10px);
   border-radius: 20px;
@@ -18,7 +21,7 @@
 }
 
 .cert-card:hover {
-  transform: translateY(-5x);
+  transform: translateY(-5px);
 }
 
 .cert-image {
@@ -47,9 +50,34 @@
   margin-top: 0.5rem;
 }
 
-/* Responsive: Stack them on mobile */
+/* Responsive: Keep grid 2x2 but scale it down for mobile */
 @media (max-width: 1000px) {
   .cert-grid-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .cert-card {
+    width: 100%; /* Fill the grid cell instead of 40vw */
+  }
+
+  .cert-image {
+    height: 100px; /* Shrink images to fit screen */
+    margin-top: 0.5rem;
+  }
+
+  .cert-info {
+    padding: 0.8rem;
+  }
+
+  .cert-info h3 {
+    font-size: 0.9rem; /* Smaller text */
+  }
+
+  .cert-info p {
+    font-size: 0.75rem;
   }
 }

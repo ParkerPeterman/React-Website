@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import TypeWriter from './TypeWriter';
 import Magnet from './Magnet';
+import './Header.css';
 
 function Header() {
   const container = useRef();
