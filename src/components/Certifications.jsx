@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './Certifications.css';
 
 function Certifications() {
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef(null);
   const certifications = [
     { id: 1, img: "Amazon_Web_Services_Logo.svg", title: "AWS Cloud Practitioner", issued: "December 2025" },
     { id: 2, img: "data+_picture.png", title: "CompTIA Data+", issued: "January 2026" },
@@ -10,6 +12,17 @@ function Certifications() {
   ];
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+
     // ── UI Interactions (Tilt) ────────────────────────────────────────────────
     const slides = document.querySelectorAll('.cert-card');
     const handleMouseMove = (e, slide) => {
@@ -44,19 +57,23 @@ function Certifications() {
     // Cleanup
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      if (observer) observer.disconnect();
     };
   }, []);
 
   return (
-    <section className="certifications-section">
+    <section ref={sectionRef} className="certifications-section">
       {/* Scroll Progress Bar */}
       <div id="scroll-progress-container" style={{ position: 'fixed', top: 0, width: '100%', height: '4px', zIndex: 100 }}>
         <div id="scroll-progress" style={{ height: '100%', background: '#FE4C25', width: '0%' }}></div>
       </div>
 
       <div className="cert-grid-container">
-        {certifications.map((cert) => (
-          <div key={cert.id} className="cert-card">
+        {certifications.map((cert, index) => (
+          <div 
+            key={cert.id} 
+            className={`cert-card ${index % 2 === 0 ? 'from-left' : 'from-right'} ${isVisible ? 'is-visible' : ''}`}
+          >
             <div 
               className="cert-image" 
               style={{ backgroundImage: `url(${cert.img})` }} 

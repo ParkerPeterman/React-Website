@@ -11,7 +11,6 @@ const NAV_ITEMS = [
         textColor: "#fff",
         links: [
             { label: "Resume", href: "#Resume", ariaLabel: "Resume" },
-            { label: "Careers", href: "/careers", ariaLabel: "About Careers" }
         ]
     },
     {
@@ -19,8 +18,8 @@ const NAV_ITEMS = [
         bgColor: "#2F293A",
         textColor: "#fff",
         links: [
-            { label: "Featured", href: "/projects", ariaLabel: "Featured Projects" },
-            { label: "Case Studies", href: "/case-studies", ariaLabel: "Project Case Studies" }
+            { label: "Featured", href: "#DashboardShowcase", ariaLabel: "Featured Projects" },
+            { label: "Github", href: "https://github.com/ParkerPeterman", ariaLabel: "Github" }
         ]
     },
     {
@@ -90,6 +89,16 @@ const CardNav = ({
         }
     };
 
+    // Handles anchor links with smooth scroll, lets external links pass through normally
+    const handleNavClick = (e, href) => {
+        if (!href.startsWith('#')) return;
+        e.preventDefault();
+        const target = document.getElementById(href.slice(1));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <div className={`card-nav-container ${className}`}>
             <nav ref={navRef} className={`card-nav ${isExpanded ? 'open' : ''}`}>
@@ -130,7 +139,6 @@ const CardNav = ({
                             ref={el => (cardsRef.current[idx] = el)}
                             style={{ backgroundColor: item.bgColor, color: item.textColor }}
                         >
-                            {/* Card labels and links now render properly */}
                             <div className="nav-card-label">{item.label}</div>
                             
                             <div className="nav-card-links">
@@ -140,6 +148,7 @@ const CardNav = ({
                                         className="nav-card-link" 
                                         href={lnk.href || "#"} 
                                         aria-label={lnk.ariaLabel}
+                                        onClick={(e) => handleNavClick(e, lnk.href)}
                                     >
                                         <GoArrowUpRight />
                                         {lnk.label}

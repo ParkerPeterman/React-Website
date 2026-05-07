@@ -17,11 +17,25 @@
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   overflow: hidden;
-  transition: transform 0.3s ease;
+  opacity: 0;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.6s ease;
 }
 
-.cert-card:hover {
-  transform: translateY(-5px);
+.cert-card.from-left {
+  transform: translateX(-50px);
+}
+
+.cert-card.from-right {
+  transform: translateX(50px);
+}
+
+.cert-card.is-visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.cert-card.is-visible:hover {
+  transform: translateY(-5px) scale(1.02);
 }
 
 .cert-image {

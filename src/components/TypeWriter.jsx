@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const Typewriter = () => {
-    const titles = ["Data Analytics Student", "AWS Certified", "Python Developer", "BI Developer"];
+    const titles = ["Dashboard Specialist", "React Dashboard Developer", "Data Analytics Expert", "BI Solutions Architect"];
 
 
     const [currentTitle, setCurrentTitle] = useState('');
@@ -32,7 +32,7 @@ const Typewriter = () => {
         return () => clearTimeout(timeout);
     }, [charIndex, isDeleting, titleIndex, titles]);
 
-    return <h4>{currentTitle}</h4>;
+    return <h4>{currentTitle || '\u00A0'}</h4>;
 };
 
 export default Typewriter;

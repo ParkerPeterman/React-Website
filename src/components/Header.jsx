@@ -19,11 +19,11 @@ function Header() {
       stagger: 0.04,
       ease: "back.out(1.7)" // Adds a slight snappy 'bounce' at the end
     })
-    // 2. Icons slide in from the sides (GitHub from left, LinkedIn from right)
-    .from(".github", { x: -60, opacity: 0 }, "-=0.6")
-    .from(".linkedin", { x: 60, opacity: 0 }, "<") // "<" starts exactly with the previous animation
-    // 3. Contact info slides up from bottom
-    .from(".contact-details", { y: 30, opacity: 0 }, "-=0.4");
+      // 2. Icons slide in from the sides (GitHub from left, LinkedIn from right)
+      .from(".github", { x: -60, opacity: 0 }, "-=0.6")
+      .from(".linkedin", { x: 60, opacity: 0 }, "<") // "<" starts exactly with the previous animation
+      // 3. Contact info slides up from bottom
+      .from(".contact-details", { y: 30, opacity: 0 }, "-=0.4");
 
   }, { scope: container });
 
@@ -35,7 +35,7 @@ function Header() {
             <a href="https://github.com/ParkerPeterman" target="_blank" rel="noopener noreferrer">
               <i className="fab fa-github"></i>
             </a>
-          </Magnet> 
+          </Magnet>
         </div>
 
         <h1 className="user-name">
@@ -73,7 +73,7 @@ function Header() {
       <h3 className="contact-details">
         <em>Maize, Kansas</em> || <em>(316) 680-5045</em> || <em>petermanparker6@gmail.com</em>
       </h3>
-      
+
       <TypeWriter />
     </header>
   );
