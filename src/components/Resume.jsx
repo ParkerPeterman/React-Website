@@ -114,34 +114,34 @@ function Resume() {
       <ResumeSection title="Work Experience">
         <article className="resume-item">
           <div className="resume-title">
-            <h3>Olive Garden | Host</h3>
-            <span className="right-aligned">May 2022 - September 2022</span>
+            <h3>Ennovar at Textron Aviation | Metrics Engineer</h3>
           </div>
           <ul>
-            <li>Sat and greeted guests</li>
-            <li>Kept track of inventory and upsold items we were over stocked on</li>
+            <li>Helped develop, maintain, and optimize  metrics dashboard for IT department.</li>
+            <li>Integrated dashboard with metrics from ticketing system Service Now.</li>
+            <li>Dashboard was used to provide insight into the efficiency and value of the student-lead IT department.</li>
           </ul>
         </article>
 
         <article className="resume-item">
           <div className="resume-title">
-            <h3>YMCA | Lifeguard</h3>
-            <span className="right-aligned">May 2023 - February 2025</span>
+            <h3>Ennovar at Kansas Fiber Network | Software Engineer</h3>
+          </div>
+          <ul>
+            <li>Helped build real-time dashboard for Network Outages</li>
+            <li>Dashboard provided metrics such as MTTR, SLA violations, estimated credits for SLA violations, outage location</li>
+            <li>Integrated tools such as Celery and Redis in with Django to provide optimal processing efficiency and durability.</li>
+            <li>Communicated with stakeholders in an agile developement enviroment.</li>
+          </ul>
+        </article>
+
+        <article className="resume-item">
+          <div className="resume-title">
+            <h3>YMCA | Lead Lifeguard</h3>
           </div>
           <ul>
             <li>Opened the pools at 4 A.M. every morning</li>
-            <li>Maintained compliance for state health regulations through rigorous chemical monitoring</li>
-          </ul>
-        </article>
-
-        <article className="resume-item">
-          <div className="resume-title">
-            <h3>Brandt Information Services | Technical Support</h3>
-            <span className="right-aligned">April 2025 - October 2025</span>
-          </div>
-          <ul>
-            <li>Interpreted state regulations to ensure that callers followed state wildlife regulations</li>
-            <li>Optimized vendor operations by troubleshooting Point of Sale system failures</li>
+            <li>Managed lifeguards schedules as well as coordinated technical trainings and drills to improve their skills</li>
           </ul>
         </article>
       </ResumeSection>
