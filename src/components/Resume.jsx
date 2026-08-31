@@ -54,8 +54,8 @@ function Resume() {
 
         <article className="resume-item">
           <div className="resume-title">
-            <h3>Western Governors University</h3>
-            <span className="right-aligned">May 2023 - February 2025</span>
+            <h3>Western Governors University | Bachelor's in Data Analytics</h3>
+            <span className="right-aligned">October 2024 - October 2026</span>
           </div>
           <ul>
             <li>4.0 GPA</li>
@@ -114,34 +114,25 @@ function Resume() {
       <ResumeSection title="Work Experience">
         <article className="resume-item">
           <div className="resume-title">
-            <h3>Olive Garden | Host</h3>
-            <span className="right-aligned">May 2022 - September 2022</span>
+            <h3>Ennovar at Kansas Fiber Network | Software Engineer</h3>
           </div>
           <ul>
-            <li>Sat and greeted guests</li>
-            <li>Kept track of inventory and upsold items we were over stocked on</li>
+            <li><bold>Software Development & Monitoring:</bold> Co-developed a real-time monitoring and tracking application focused on visualizing and analyzing core network infrastructure metrics.</li>
+            <li><bold>Automation & Logic Implementation: </bold> Programmed automated logic to evaluate system downtime against SLA contracts and automate MTTR calculations, reducing administrative overhead.</li>
+            <li><bold>System Architecture & Data Flow:  </bold> Architected a distributed compute model and local database caching system to optimize real-time data flows and maintain high operational uptime.</li>
+            <li><bold>Quality Assurance & Documentation: </bold> Contributed to debugging, technical problem identification, and documentation of software components across operational workflows.</li>
           </ul>
         </article>
 
         <article className="resume-item">
           <div className="resume-title">
-            <h3>YMCA | Lifeguard</h3>
-            <span className="right-aligned">May 2023 - February 2025</span>
+            <h3>Ennovar at Textron Aviation | Technical Operations Team</h3>
           </div>
           <ul>
-            <li>Opened the pools at 4 A.M. every morning</li>
-            <li>Maintained compliance for state health regulations through rigorous chemical monitoring</li>
-          </ul>
-        </article>
-
-        <article className="resume-item">
-          <div className="resume-title">
-            <h3>Brandt Information Services | Technical Support</h3>
-            <span className="right-aligned">April 2025 - October 2025</span>
-          </div>
-          <ul>
-            <li>Interpreted state regulations to ensure that callers followed state wildlife regulations</li>
-            <li>Optimized vendor operations by troubleshooting Point of Sale system failures</li>
+            <li><bold>Defense Contracting Security Compliance: </bold> Operated within a strictly controlled environment, maintaining defense contract security compliance standards.</li>
+            <li><bold>Systems Integration & Analytics: </bold> Integrated ServiceNow ticketing data to engineer, maintain, and optimize real-time operational health dashboards.</li>
+            <li><bold>System Architecture & Data Flow:  </bold> Imaged organizational systems with custom, department-specific software configurations based on individual user roles.</li>
+            <li><bold>Technical Support & Diagnostics:  </bold> Resolved complex hardware, software, and configuration issues while providing detailed documentation for organizational assets.</li>
           </ul>
         </article>
       </ResumeSection>
