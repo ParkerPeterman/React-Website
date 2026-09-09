@@ -114,6 +114,7 @@ function Resume() {
       <ResumeSection title="Work Experience">
         <article className="resume-item">
           <div className="resume-title">
+<<<<<<< HEAD
             <h3>Ennovar at Kansas Fiber Network | Software Engineer</h3>
           </div>
           <ul>
@@ -121,11 +122,20 @@ function Resume() {
             <li><bold>Automation & Logic Implementation: </bold> Programmed automated logic to evaluate system downtime against SLA contracts and automate MTTR calculations, reducing administrative overhead.</li>
             <li><bold>System Architecture & Data Flow:  </bold> Architected a distributed compute model and local database caching system to optimize real-time data flows and maintain high operational uptime.</li>
             <li><bold>Quality Assurance & Documentation: </bold> Contributed to debugging, technical problem identification, and documentation of software components across operational workflows.</li>
+=======
+            <h3>Ennovar at Textron Aviation | Metrics Engineer</h3>
+          </div>
+          <ul>
+            <li>Helped develop, maintain, and optimize  metrics dashboard for IT department.</li>
+            <li>Integrated dashboard with metrics from ticketing system Service Now.</li>
+            <li>Dashboard was used to provide insight into the efficiency and value of the student-lead IT department.</li>
+>>>>>>> def176265523cc8c949f21bb2656c43f59d09525
           </ul>
         </article>
 
         <article className="resume-item">
           <div className="resume-title">
+<<<<<<< HEAD
             <h3>Ennovar at Textron Aviation | Technical Operations Team</h3>
           </div>
           <ul>
@@ -133,6 +143,25 @@ function Resume() {
             <li><bold>Systems Integration & Analytics: </bold> Integrated ServiceNow ticketing data to engineer, maintain, and optimize real-time operational health dashboards.</li>
             <li><bold>System Architecture & Data Flow:  </bold> Imaged organizational systems with custom, department-specific software configurations based on individual user roles.</li>
             <li><bold>Technical Support & Diagnostics:  </bold> Resolved complex hardware, software, and configuration issues while providing detailed documentation for organizational assets.</li>
+=======
+            <h3>Ennovar at Kansas Fiber Network | Software Engineer</h3>
+          </div>
+          <ul>
+            <li>Helped build real-time dashboard for Network Outages</li>
+            <li>Dashboard provided metrics such as MTTR, SLA violations, estimated credits for SLA violations, outage location</li>
+            <li>Integrated tools such as Celery and Redis in with Django to provide optimal processing efficiency and durability.</li>
+            <li>Communicated with stakeholders in an agile developement enviroment.</li>
+          </ul>
+        </article>
+
+        <article className="resume-item">
+          <div className="resume-title">
+            <h3>YMCA | Lead Lifeguard</h3>
+          </div>
+          <ul>
+            <li>Opened the pools at 4 A.M. every morning</li>
+            <li>Managed lifeguards schedules as well as coordinated technical trainings and drills to improve their skills</li>
+>>>>>>> def176265523cc8c949f21bb2656c43f59d09525
           </ul>
         </article>
       </ResumeSection>
