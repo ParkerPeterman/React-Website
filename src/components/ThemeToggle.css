@@ -1,0 +1,54 @@
+.ttoggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  width: 62px;
+  height: 30px;
+  padding: 0 7px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  background: var(--surface-raise);
+  transition: border-color 0.35s var(--ease-out), background-color 0.35s var(--ease-out);
+}
+
+.ttoggle:hover { border-color: var(--accent); }
+
+/* The knob sits behind the icons and slides between them. It rests on the
+   moon in dark mode and travels to the sun in light — the highlighted icon is
+   the theme currently in effect, not the one the button would switch to. */
+.ttoggle__knob {
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  margin-top: -11px;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: translateX(33px);
+  transition: transform 0.42s var(--ease-io);
+}
+
+.ttoggle.is-light .ttoggle__knob { transform: translateX(0); }
+
+.ttoggle__icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  transition: color 0.42s var(--ease-io);
+}
+
+/* Whichever icon the knob is under flips to read against the accent fill. */
+.ttoggle__icon--sun  { color: var(--text-faint); }
+.ttoggle__icon--moon { color: var(--surface); }
+
+.ttoggle.is-light .ttoggle__icon--sun  { color: var(--surface); }
+.ttoggle.is-light .ttoggle__icon--moon { color: var(--text-faint); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ttoggle__knob { transition: none; }
+}

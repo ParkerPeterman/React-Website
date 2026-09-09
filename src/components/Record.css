@@ -1,0 +1,114 @@
+.record {
+  padding-block: var(--bay);
+}
+
+.record .marker { margin-bottom: clamp(2.5rem, 6vh, 4rem); }
+
+/* --- Heading, pushed off-grid to the right ------------------------------- */
+.record__intro {
+  margin-bottom: clamp(3.5rem, 10vh, 7rem);
+  padding-left: clamp(0rem, 22vw, 20rem);
+}
+
+.record__heading {
+  font-family: var(--font-display);
+  font-size: var(--t-xl);
+  font-weight: 800;
+  font-stretch: 112%;
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+}
+
+.record__heading .serif-em { text-transform: none; }
+
+/* --- Groups -------------------------------------------------------------- */
+.record__group + .record__group { margin-top: clamp(3rem, 8vh, 5rem); }
+
+.record__grouptitle {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 2rem;
+}
+
+.record__entry + .record__entry {
+  margin-top: clamp(2rem, 5vh, 3.25rem);
+  padding-top: clamp(2rem, 5vh, 3.25rem);
+  border-top: 1px solid var(--line);
+}
+
+/* --- Entry head ---------------------------------------------------------- */
+.record__head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 0.4rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.record__org {
+  font-family: var(--font-display);
+  font-size: var(--t-md);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--text);
+}
+
+.record__period {
+  grid-row: 1;
+  grid-column: 2;
+  color: var(--text-faint);
+}
+
+.record__role {
+  grid-column: 1 / -1;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--acid);
+}
+
+/* --- Points as a two-column ledger --------------------------------------- */
+.record__points li {
+  display: grid;
+  grid-template-columns: minmax(0, 14rem) 1fr;
+  gap: 0.35rem 2rem;
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.record__pointlabel {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding-top: 0.25rem;
+}
+
+.record__pointbody {
+  color: var(--text-dim);
+  max-width: 62ch;
+  line-height: 1.5;
+}
+
+/* --- Service ------------------------------------------------------------- */
+.record__service {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: 2rem;
+}
+
+.record__service li {
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  color: var(--text-dim);
+  max-width: 46ch;
+}
+
+@media (max-width: 860px) {
+  .record__intro { padding-left: 0; }
+  .record__points li { grid-template-columns: 1fr; }
+  .record__head { grid-template-columns: 1fr; }
+  .record__period { grid-row: auto; grid-column: 1; }
+}

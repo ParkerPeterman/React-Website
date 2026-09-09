@@ -1,0 +1,116 @@
+.about {
+  padding-block: var(--bay);
+}
+
+.about .marker { margin-bottom: clamp(3rem, 8vh, 6rem); }
+
+.about__body {
+  align-items: start;
+  row-gap: 3rem;
+}
+
+/* --- Sticky lede --------------------------------------------------------- */
+.about__lede {
+  grid-column: 1 / span 4;
+  position: sticky;
+  top: clamp(6rem, 18vh, 10rem);
+}
+
+.about__heading {
+  font-family: var(--font-display);
+  font-size: var(--t-lg);
+  font-weight: 800;
+  font-stretch: 110%;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.about__heading .serif-em { text-transform: none; }
+
+.about__sub {
+  margin-top: 1.25rem;
+  max-width: 26ch;
+  color: var(--text-dim);
+}
+
+/* --- Accordion ----------------------------------------------------------- */
+.about__list {
+  grid-column: 6 / span 7;
+  border-top: 1px solid var(--line);
+}
+
+.about__row { border-bottom: 1px solid var(--line); }
+
+.about__trigger {
+  display: grid;
+  grid-template-columns: 3rem 1fr 1.5rem;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: clamp(1.1rem, 2.4vw, 1.7rem) 0;
+  text-align: left;
+}
+
+.about__num { transition: color 0.35s var(--ease-out); }
+
+.about__label {
+  font-family: var(--font-display);
+  font-size: var(--t-md);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--text-dim);
+  transition: color 0.35s var(--ease-out), transform 0.45s var(--ease-out);
+}
+
+/* Plus mark that becomes a minus when open. */
+.about__plus {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  justify-self: end;
+}
+.about__plus::before,
+.about__plus::after {
+  content: '';
+  position: absolute;
+  inset: 50% 0 auto 0;
+  height: 1px;
+  background: var(--text-faint);
+  transition: transform 0.4s var(--ease-io), background-color 0.35s var(--ease-out);
+}
+.about__plus::after { transform: rotate(90deg); }
+
+.about__row.is-open .about__label {
+  color: var(--text);
+  transform: translateX(8px);
+}
+.about__row.is-open .about__num { color: var(--acid); }
+.about__row.is-open .about__plus::before,
+.about__row.is-open .about__plus::after { background: var(--acid); }
+.about__row.is-open .about__plus::after { transform: rotate(0deg); }
+
+/* Grid-rows trick: animates to auto height without measuring. */
+.about__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.55s var(--ease-io);
+}
+.about__row.is-open .about__panel { grid-template-rows: 1fr; }
+
+.about__panel > p {
+  overflow: hidden;
+  max-width: 56ch;
+  padding-left: 4rem;
+  color: var(--text-dim);
+  line-height: 1.55;
+}
+
+.about__row.is-open .about__panel > p { padding-bottom: 1.6rem; }
+
+@media (max-width: 860px) {
+  .about__body { display: flex; flex-direction: column; }
+  .about__lede { position: static; }
+  .about__panel > p { padding-left: 0; }
+  .about__trigger { grid-template-columns: 2.4rem 1fr 1.2rem; }
+}

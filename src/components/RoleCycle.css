@@ -1,0 +1,25 @@
+.rolecycle {
+  margin-top: 0.35rem;
+}
+
+.rolecycle__window {
+  position: relative;
+  display: block;
+  height: 1.25em;
+  overflow: hidden;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--t-md);
+  line-height: 1.25;
+  color: var(--acid);
+  white-space: nowrap;
+}
+
+.rolecycle__out,
+.rolecycle__in {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  will-change: transform;
+}

@@ -1,0 +1,22 @@
+.footer {
+  border-top: 1px solid var(--line);
+  padding-block: 2rem;
+}
+
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.footer__top {
+  color: var(--text-dim);
+  transition: color 0.35s var(--ease-out);
+}
+.footer__top:hover { color: var(--acid); }
+
+@media (max-width: 640px) {
+  .footer__built { order: 3; width: 100%; }
+}

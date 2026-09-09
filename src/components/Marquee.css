@@ -1,0 +1,45 @@
+.marquee {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: clamp(0.75rem, 2vw, 1.4rem) 0;
+  border-block: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+.marquee__item {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  padding-right: clamp(1.5rem, 4vw, 3.5rem);
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4.5vw, 3.4rem);
+  font-weight: 700;
+  font-stretch: 108%;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--text);
+}
+
+.marquee__sep {
+  font-size: 0.42em;
+  color: var(--accent);
+  transform: translateY(-0.25em);
+}
+
+/* Every other item is outlined rather than filled — keeps a long strip alive. */
+.marquee__item:nth-child(even) {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text-faint);
+}
+.marquee__item:nth-child(even) .marquee__sep {
+  color: var(--accent);
+  -webkit-text-stroke: 0;
+}

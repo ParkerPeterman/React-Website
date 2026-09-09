@@ -1,0 +1,216 @@
+.rail {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.rail__track {
+  display: flex;
+  align-items: stretch;
+  height: 100svh;
+  width: max-content;
+  will-change: transform;
+}
+
+.rail__panel {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--gutter);
+  border-right: 1px solid var(--line);
+}
+
+/* --- Opening panel ------------------------------------------------------- */
+.rail__intro {
+  width: min(88vw, 40rem);
+  gap: 1.75rem;
+}
+
+.rail__heading {
+  font-family: var(--font-display);
+  font-size: var(--t-xl);
+  font-weight: 800;
+  font-stretch: 112%;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.rail__note {
+  max-width: 32ch;
+  color: var(--text-dim);
+}
+
+/* --- Project cards ------------------------------------------------------- */
+.rail__card {
+  position: relative;
+  width: min(94vw, 62rem);
+  justify-content: flex-end;
+  padding-bottom: clamp(3rem, 12vh, 7rem);
+  overflow: hidden;
+}
+
+/* Oversized ghost numeral behind the content. */
+.rail__index {
+  position: absolute;
+  top: clamp(2rem, 8vh, 5rem);
+  left: var(--gutter);
+  font-family: var(--font-display);
+  font-size: clamp(8rem, 26vw, 22rem);
+  font-weight: 900;
+  font-stretch: 120%;
+  line-height: 0.75;
+  letter-spacing: -0.06em;
+  pointer-events: none;
+  will-change: transform;
+
+  /* Filled in the panel's own accent rather than left as a hairline outline,
+     which was near-invisible against the ground. Kept low-opacity and behind
+     the copy so it still reads as a background numeral, plus a stroke to hold
+     its edge where the fill is faintest. */
+  color: color-mix(in srgb, var(--accent) 22%, transparent);
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--accent) 38%, transparent);
+}
+
+/* Copy and live preview share the card. The preview is the wider column so
+   the miniature panel stays legible; below 1100px they stack. */
+.rail__body {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  align-items: end;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  width: 100%;
+}
+
+.rail__copy { max-width: 34rem; }
+
+.rail__preview { min-width: 0; }
+
+.rail__title {
+  font-family: var(--font-display);
+  font-size: var(--t-lg);
+  font-weight: 700;
+  font-stretch: 105%;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  margin-bottom: 1rem;
+}
+
+.rail__blurb {
+  color: var(--text-dim);
+  max-width: 42ch;
+  margin-bottom: 1.75rem;
+}
+
+/* --- Metric -------------------------------------------------------------- */
+.rail__metric {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.9rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 1.5rem;
+}
+
+.rail__metric-value {
+  font-family: var(--font-display);
+  font-size: var(--t-md);
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+
+/* --- Tags ---------------------------------------------------------------- */
+.rail__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 2rem;
+}
+
+.rail__tags li {
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  color: var(--text-dim);
+}
+
+/* --- CTA ----------------------------------------------------------------- */
+.rail__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.4rem;
+  border: 1px solid var(--accent);
+  border-radius: 100px;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background-color 0.4s var(--ease-out), color 0.4s var(--ease-out);
+}
+
+.rail__cta svg { transition: transform 0.4s var(--ease-out); }
+
+.rail__cta:hover {
+  background: var(--accent);
+  color: var(--surface);
+}
+.rail__cta:hover svg { transform: translate(3px, -3px); }
+
+/* --- Closing panel ------------------------------------------------------- */
+.rail__end {
+  width: min(70vw, 26rem);
+  gap: 1rem;
+  border-right: 0;
+}
+
+.rail__endlink {
+  font-family: var(--font-display);
+  font-size: var(--t-lg);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  color: var(--text);
+  transition: color 0.35s var(--ease-out);
+}
+.rail__endlink:hover { color: var(--acid); }
+
+/* --- Narrow: unpin, stack vertically ------------------------------------- */
+@media (max-width: 1100px) {
+  .rail__body {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: stretch;
+  }
+
+  /* Copy first when stacked — the preview is decoration, not the lede. */
+  .rail__preview { order: 2; }
+  .rail__copy { order: 1; }
+}
+
+@media (max-width: 860px) {
+  .rail__track {
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+  }
+
+  .rail__panel {
+    width: 100%;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    padding-block: clamp(3.5rem, 12vh, 6rem);
+  }
+
+  .rail__card { justify-content: flex-start; }
+
+  .rail__index {
+    position: static;
+    font-size: clamp(5rem, 30vw, 10rem);
+    margin-bottom: 0.5rem;
+  }
+
+  .rail__end { border-bottom: 0; }
+}

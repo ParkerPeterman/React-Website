@@ -1,0 +1,161 @@
+.cnav {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-nav);
+  pointer-events: none;
+}
+
+.cnav > * { pointer-events: auto; }
+
+/* --- Mark ---------------------------------------------------------------- */
+.cnav__mark {
+  position: absolute;
+  top: var(--gutter);
+  left: var(--gutter);
+  width: clamp(112px, 11vw, 180px);
+  opacity: 0;
+  transform: translateY(-12px);
+}
+
+/* The signature artwork is drawn in near-black (#0A0B0A–#0F0F0F), within a
+   hair of the dark ground — so it is flattened to a silhouette in the current
+   theme's text colour rather than shown as-is. Hover feedback is opacity;
+   restoring the true fill would erase it against dark. */
+.cnav__mark img {
+  width: 100%;
+  height: auto;
+  filter: var(--logo-filter);
+  opacity: 0.82;
+  transition: opacity 0.4s var(--ease-out);
+}
+
+.cnav__mark:hover img { opacity: 1; }
+
+/* --- The constellation ---------------------------------------------------
+   Each item is placed individually down the right edge, stepped inward so
+   they read as scattered points rather than a stacked list.
+   ------------------------------------------------------------------------ */
+.cnav__list {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(30vw, 320px);
+}
+
+.cnav__item {
+  position: absolute;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.45s var(--ease-out);
+}
+
+.cnav__item--0 { top: 16vh;  right: 3.5vw; }
+.cnav__item--1 { top: 28vh;  right: 7.5vw; }
+.cnav__item--2 { top: 40vh;  right: 2.5vw; }
+.cnav__item--3 { top: 52vh;  right: 6.5vw; }
+.cnav__item--4 { top: 64vh;  right: 4vw;   }
+
+.cnav__item a {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.2rem 0;
+}
+
+.cnav__idx {
+  font-size: 0.6rem;
+  color: var(--text-faint);
+  transition: color 0.35s var(--ease-out);
+}
+
+.cnav__label {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--text-dim);
+  transition: color 0.35s var(--ease-out), transform 0.45s var(--ease-out);
+}
+
+/* Hovering one item recedes the others — the CUSP move. */
+.cnav__list:hover .cnav__item { opacity: 0.32; }
+.cnav__list:hover .cnav__item:hover { opacity: 1; }
+
+.cnav__item a:hover .cnav__label {
+  color: var(--text);
+  transform: translateX(-6px);
+}
+.cnav__item a:hover .cnav__idx { color: var(--acid); }
+
+/* Active section gets the accent and a leading tick. */
+.cnav__item.is-active .cnav__label { color: var(--acid); }
+.cnav__item.is-active .cnav__idx  { color: var(--acid); }
+.cnav__item.is-active a::before {
+  content: '';
+  position: absolute;
+  left: -1.4rem;
+  top: 50%;
+  width: 1rem;
+  height: 1px;
+  background: var(--acid);
+}
+
+/* --- Controls (theme switch + mobile menu) ------------------------------- */
+.cnav__controls {
+  position: absolute;
+  top: var(--gutter);
+  right: var(--gutter);
+  z-index: 2; /* above the mobile menu overlay so the theme stays switchable */
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  opacity: 0;
+  transform: translateY(-12px);
+}
+
+/* Menu button is mobile-only; the theme switch shows at every size. */
+.cnav__toggle {
+  display: none;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  color: var(--text);
+  background: var(--scrim);
+  backdrop-filter: blur(10px);
+}
+
+@media (max-width: 860px) {
+  .cnav__toggle { display: block; }
+
+  /* Leave clearance for the controls sharing this row. */
+  .cnav__mark { width: clamp(84px, 26vw, 120px); }
+
+  .cnav__list {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: var(--gutter);
+    background: var(--scrim-solid);
+    backdrop-filter: blur(18px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s var(--ease-out);
+  }
+
+  .cnav.is-open .cnav__list { opacity: 1; pointer-events: auto; }
+
+  .cnav__item {
+    position: static;
+    opacity: 1;
+    transform: none;
+  }
+
+  .cnav__label { font-size: var(--t-lg); font-weight: 700; }
+  .cnav__item.is-active a::before { display: none; }
+}

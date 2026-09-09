@@ -1,0 +1,72 @@
+.cursor {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-cursor);
+  pointer-events: none;
+}
+
+.cursor__ring,
+.cursor__dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+}
+
+.cursor__ring {
+  width: 38px;
+  height: 38px;
+  margin: -19px 0 0 -19px;
+  border: 1px solid var(--text-faint);
+  transition: width 0.35s var(--ease-out), height 0.35s var(--ease-out),
+              margin 0.35s var(--ease-out), background-color 0.35s var(--ease-out),
+              border-color 0.35s var(--ease-out);
+}
+
+.cursor__dot {
+  width: 5px;
+  height: 5px;
+  margin: -2.5px 0 0 -2.5px;
+  background: var(--text);
+}
+
+/* Swell over interactive targets. */
+.cursor__ring.is-active {
+  width: 74px;
+  height: 74px;
+  margin: -37px 0 0 -37px;
+  border-color: transparent;
+  background: var(--accent);
+  mix-blend-mode: difference;
+}
+
+/* Labelled variant — the ring carries a word ("view", "drag"). */
+.cursor__ring.has-label {
+  width: 96px;
+  height: 96px;
+  margin: -48px 0 0 -48px;
+  mix-blend-mode: normal;
+  background: var(--acid);
+}
+
+.cursor__ring.has-label::after {
+  content: attr(data-label);
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--surface);
+}
+
+.cursor__ring.has-label + .cursor__dot { opacity: 0 !important; }
+
+@media (pointer: coarse) {
+  .cursor { display: none; }
+}

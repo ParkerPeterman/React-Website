@@ -1,0 +1,144 @@
+/* A live panel preview. Colour comes entirely from --accent, which the card
+   sets via its .a-* class, so the preview matches its project without any
+   per-project rules here. */
+
+.ppv {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: var(--surface-raise);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* --- Chrome bar ---------------------------------------------------------- */
+.ppv__chrome {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.75rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-hover);
+}
+
+.ppv__live {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.ppv__chrometext {
+  color: var(--text-dim);
+  text-transform: none;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- KPI row ------------------------------------------------------------- */
+.ppv__kpis {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--line);
+}
+
+.ppv__kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.7rem 0.75rem;
+}
+
+.ppv__kpi + .ppv__kpi { border-left: 1px solid var(--line); }
+
+.ppv__kpival {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.ppv__kpilabel { font-size: 0.6rem; }
+
+/* --- Body ---------------------------------------------------------------- */
+.ppv__body { padding: 0.85rem 0.75rem; }
+
+/* --- Bars ---------------------------------------------------------------- */
+.ppv__bar + .ppv__bar { margin-top: 0.55rem; }
+
+.ppv__barlabel {
+  display: block;
+  font-size: 0.55rem;
+  margin-bottom: 0.2rem;
+}
+
+.ppv__bartrack {
+  display: block;
+  height: 6px;
+  background: color-mix(in srgb, var(--text) 10%, transparent);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.ppv__barfill {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  border-radius: inherit;
+  transform-origin: left center;
+  will-change: transform;
+}
+
+/* --- Chart --------------------------------------------------------------- */
+/* Must clip: the track is two periods wide (double the viewBox) so it can loop
+   seamlessly, and the overflowing half would otherwise paint over the card. */
+.ppv__chart {
+  display: block;
+  width: 100%;
+  height: clamp(5rem, 11vh, 7.5rem);
+  overflow: hidden;
+}
+
+.ppv__grid line {
+  stroke: var(--line);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.ppv__track { will-change: transform; }
+
+.ppv__trace {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  /* preserveAspectRatio="none" stretches the viewBox, which would smear the
+     stroke width — this keeps it even. */
+  vector-effect: non-scaling-stroke;
+}
+
+.ppv__area {
+  fill: var(--accent);
+  opacity: 0.14;
+}
+
+.ppv__node {
+  stroke: var(--surface-raise);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.ppv__node--good { fill: var(--good); }
+.ppv__node--warn { fill: var(--warn); }
+.ppv__node--bad  { fill: var(--bad); }
+
+@media (max-width: 860px) {
+  .ppv__chart { height: 5rem; }
+}

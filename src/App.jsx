@@ -1,77 +1,90 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './App.css';
+import { useEffect, useState } from 'react';
+import './styles/tokens.css';
+import './styles/base.css';
 
-import TechnicalBackground from './components/background';
-import ScrollBar from './components/ScrollBar';
+import useSmoothScroll from './lib/useSmoothScroll';
+import { ScrollTrigger } from './lib/motion';
 
-import Navigation from './components/Navigation';
-import Header from './components/Header';
-import Certifications from './components/Certifications';
-import { LogoLoop } from './components/LogoLoop'
-import Resume from './components/Resume';
-import ContactForm from './components/ContactForm';
+import Cursor from './components/Cursor';
+import ConstellationNav from './components/ConstellationNav';
+import ProgressRail from './components/ProgressRail';
+import Hero from './components/Hero';
+import Marquee from './components/Marquee';
+import WorkRail from './components/WorkRail';
+import About from './components/About';
+import Record from './components/Record';
+import Credentials from './components/Credentials';
+import Contact from './components/Contact';
 import Footer from './components/Footer';
-import DashboardShowcase from './components/DashboardShowcase';
 
-import RentalDashboard from './components/dashboards/RentalDashboard/RentalDashboard';
-import CensusDashboard from './components/dashboards/CensusDashboard/CensusDashboard';
-import NOCDashboard from './components/dashboards/NOCDashboard/NOCDashboard';
+import RentalDashboard from './dashboards/RentalDashboard';
+import CensusDashboard from './dashboards/CensusDashboard';
+import NOCDashboard from './dashboards/NOCDashboard';
 
-const logo = '/Logo.svg';
+const DASHBOARDS = {
+  '#rental': RentalDashboard,
+  '#census': CensusDashboard,
+  '#noc': NOCDashboard,
+};
 
-function App() {
-  const [theme, setTheme] = useState('dark');
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [currentHash, setCurrentHash] = useState(window.location.hash);
-
+/** Minimal hash router — keeps the dashboards addressable without a dep. */
+function useHashRoute() {
+  const [hash, setHash] = useState(() => window.location.hash);
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash;
-      setCurrentHash(window.location.hash);
-    };
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    const onChange = () => setHash(window.location.hash);
+    window.addEventListener('hashchange', onChange);
+    return () => window.removeEventListener('hashchange', onChange);
   }, []);
+  return hash;
+}
 
-  if (currentHash === '#rental') return <RentalDashboard />;
-  if (currentHash === '#census') return <CensusDashboard />;
-  if (currentHash === '#noc') return <NOCDashboard />;
+function Site() {
+  useSmoothScroll();
+
+  // Fonts change text metrics, which changes pinned scroll distances.
+  useEffect(() => {
+    document.fonts?.ready.then(() => ScrollTrigger.refresh());
+  }, []);
 
   return (
     <>
-      <TechnicalBackground />
-      <ScrollBar />
+      <a className="skip-link" href="#work">
+        Skip to work
+      </a>
 
-      <Navigation logo={logo} logoAlt="Parker Peterman Logo" />
+      <Cursor />
+      <ConstellationNav />
+      <ProgressRail />
 
-      <div id="scroll-progress" style={{ width: `${scrollProgress}%` }}></div>
+      <main>
+        <Hero />
 
-      <Header />
+        <Marquee
+          items={['Data Engineering', 'Machine Learning', 'Analytics', 'Dashboards']}
+          accent="acid"
+        />
 
-      <div id="DashboardShowcase">
-        <DashboardShowcase />
-      </div>
+        <WorkRail />
+        <About />
+        <Record />
+        <Credentials />
+        <Contact />
+      </main>
 
-      <Certifications />
-
-      <LogoLoop
-        logoHeight={100}
-        gap={48}
-        speed={55}
-        fadeOut={true}
-        fadeOutColor="#020003"
-      />
-      
-      <div id="Resume">
-        <Resume />
-      </div>
-
-      <div id="ContactForm">
-        <ContactForm />
-      </div>
       <Footer />
     </>
   );
 }
 
-export default App;
+export default function App() {
+  const hash = useHashRoute();
+  const Dashboard = DASHBOARDS[hash];
+
+  // Dashboards are full-screen takeovers — start them at the top.
+  useEffect(() => {
+    if (Dashboard) window.scrollTo(0, 0);
+  }, [Dashboard, hash]);
+
+  if (Dashboard) return <Dashboard />;
+  return <Site />;
+}

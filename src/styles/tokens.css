@@ -1,0 +1,118 @@
+/* ==========================================================================
+   DESIGN TOKENS
+   Restrained palette, bold application. Three accents used sparingly — one per
+   project, never two in one element.
+
+   Tokens are semantic, not literal: --surface is the ground and --text is what
+   sits on it, whichever way round the theme is. Dark is the default; the light
+   block below overrides only what must change.
+
+   The theme is resolved to a data-theme attribute on <html> by an inline
+   script in index.html before first paint, so there is no flash and CSS only
+   ever needs to match [data-theme="light"].
+   ========================================================================== */
+
+:root {
+  /* --- Ground ------------------------------------------------------------ */
+  --surface:        #08080A;
+  --surface-raise:  #0F0F13;
+  --surface-hover:  #121216;
+  --line:           #1C1C22;
+
+  /* Translucent grounds for sticky bars and overlays. */
+  --scrim:          rgba(8, 8, 10, 0.86);
+  --scrim-solid:    rgba(8, 8, 10, 0.94);
+  --row-hover:      rgba(255, 255, 255, 0.025);
+
+  /* --- Type -------------------------------------------------------------- */
+  --text:       #EDE8DF;
+  --text-dim:   rgba(237, 232, 223, 0.62);
+  --text-faint: rgba(237, 232, 223, 0.34);
+
+  /* --- Accents ----------------------------------------------------------- */
+  --acid:       #C6F24E;
+  --violet:     #7B4DFF;
+  --ember:      #FF4D23;
+
+  --accent:     var(--acid);
+
+  /* --- Status ------------------------------------------------------------ */
+  --good: #4ADE80;
+  --warn: #FACC15;
+  --bad:  var(--ember);
+
+  /* Normalizes logo artwork to a flat silhouette. Source fills across these
+     assets run from #0A0B0A to #fff, so neither raw colour nor a single
+     brightness pass is legible on both grounds. */
+  --logo-filter: brightness(0) invert(1);
+
+  /* Resting treatment for full-colour badge artwork: lifted on dark so the
+     mid-tones don't sink into the ground, held back on light. */
+  --badge-rest-filter: grayscale(1) brightness(1.5);
+
+  /* --- Families ---------------------------------------------------------- */
+  --font-display: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-body:    'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-serif:   'Instrument Serif', Georgia, serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* --- Scale ------------------------------------------------------------- */
+  --t-mega:  clamp(3.2rem, 15.5vw, 16rem);
+  --t-xl:    clamp(2.4rem, 8vw, 7rem);
+  --t-lg:    clamp(1.8rem, 4.4vw, 3.4rem);
+  --t-md:    clamp(1.25rem, 2.2vw, 1.75rem);
+  --t-body:  clamp(1rem, 1.15vw, 1.15rem);
+  --t-sm:    0.875rem;
+  --t-mono:  0.7rem;
+
+  /* --- Rhythm ------------------------------------------------------------ */
+  --gutter:  clamp(1.25rem, 4vw, 4.5rem);
+  --bay:     clamp(6rem, 14vh, 11rem);
+
+  /* --- Motion ------------------------------------------------------------ */
+  --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-io:   cubic-bezier(0.76, 0, 0.24, 1);
+
+  --z-cursor:   9000;
+  --z-preload:  8000;
+  --z-nav:      7000;
+  --z-rail:     6000;
+}
+
+/* ==========================================================================
+   LIGHT
+   Warm paper rather than white — pure #fff under this much oversized type is
+   glaring. The accents are darkened: #C6F24E sits at roughly 1.2:1 on paper
+   and is unusable for text, so each drops to a value that clears 4.5:1.
+   ========================================================================== */
+
+:root[data-theme='light'] {
+  --surface:        #F4F1EA;
+  --surface-raise:  #FBF9F4;
+  --surface-hover:  #FFFFFF;
+  --line:           #DED8CC;
+
+  --scrim:          rgba(244, 241, 234, 0.86);
+  --scrim-solid:    rgba(244, 241, 234, 0.96);
+  --row-hover:      rgba(20, 20, 26, 0.035);
+
+  --text:       #131318;
+  --text-dim:   rgba(19, 19, 24, 0.68);
+  --text-faint: rgba(19, 19, 24, 0.45);
+
+  --acid:       #4F6B00;
+  --violet:     #5B2EE5;
+  --ember:      #C43A12;
+
+  --good: #17803D;
+  --warn: #8A6100;
+  --bad:  var(--ember);
+
+  --logo-filter: brightness(0);
+  --badge-rest-filter: grayscale(1) brightness(0.96);
+}
+
+/* Accent utility — set --accent on any subtree to recolor its highlights. */
+.a-acid   { --accent: var(--acid); }
+.a-violet { --accent: var(--violet); }
+.a-ember  { --accent: var(--ember); }

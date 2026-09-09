@@ -1,0 +1,111 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--gutter);
+  padding-bottom: clamp(2rem, 6vh, 4rem);
+  overflow: hidden;
+}
+
+/* --- The name ------------------------------------------------------------ */
+.hero__name {
+  font-family: var(--font-display);
+  font-size: var(--t-mega);
+  font-weight: 800;
+  font-stretch: 115%;
+  line-height: 0.82;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  margin-bottom: clamp(2rem, 6vh, 4.5rem);
+}
+
+.hero__line { display: block; will-change: transform; }
+
+/* Last name is offset and accented — deliberately off the grid. */
+.hero__line--last {
+  margin-left: clamp(1rem, 12vw, 12rem);
+  color: var(--acid);
+}
+
+.hero__mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em; /* room for descenders inside the mask */
+}
+
+.hero__char {
+  display: inline-block;
+  transform: translateY(105%);
+  will-change: transform;
+}
+
+/* --- Meta row ------------------------------------------------------------ */
+.hero__meta {
+  align-items: end;
+  row-gap: 2rem;
+  will-change: transform;
+}
+
+.hero__intro {
+  grid-column: 1 / span 5;
+  max-width: 44ch;
+  font-size: var(--t-body);
+  color: var(--text-dim);
+  line-height: 1.45;
+}
+
+.hero__role {
+  grid-column: 7 / span 3;
+}
+
+.hero__contact {
+  grid-column: 10 / span 3;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-style: normal;
+  text-align: right;
+}
+
+.hero__contact a { transition: color 0.3s var(--ease-out); }
+.hero__contact a:hover { color: var(--acid); }
+
+/* --- Scroll cue ---------------------------------------------------------- */
+.hero__scrollcue {
+  position: absolute;
+  left: var(--gutter);
+  top: 50%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transform: rotate(90deg);
+  transform-origin: left center;
+  opacity: 0;
+}
+
+.hero__scrollcue-rule {
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: var(--text-faint);
+  animation: cue 2.4s var(--ease-io) infinite;
+  transform-origin: left;
+}
+
+@keyframes cue {
+  0%, 100% { transform: scaleX(0.35); opacity: 0.4; }
+  50%      { transform: scaleX(1);    opacity: 1;   }
+}
+
+/* --- Narrow -------------------------------------------------------------- */
+@media (max-width: 860px) {
+  .hero { justify-content: center; padding-top: 6rem; }
+
+  .hero__line--last { margin-left: 0.6rem; }
+
+  .hero__meta { display: flex; flex-direction: column; align-items: flex-start; gap: 1.75rem; }
+  .hero__intro, .hero__role, .hero__contact { max-width: none; text-align: left; }
+  .hero__scrollcue { display: none; }
+}
