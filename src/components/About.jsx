@@ -33,7 +33,7 @@ export default function About() {
             </span>
           </h2>
           <p className="about__sub" data-rise>
-            Five areas, from the warehouse up to the interface.
+            Five areas, from the server up to the interface.
           </p>
         </div>
 

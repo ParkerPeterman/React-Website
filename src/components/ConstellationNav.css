@@ -128,8 +128,26 @@
 @media (max-width: 860px) {
   .cnav__toggle { display: block; }
 
+  /* Narrow enough that headings scroll under the mark rather than past it, so
+     the top row needs a ground of its own. Fades out instead of ending on a
+     hard edge, which would read as a bar the design doesn't otherwise have. */
+  .cnav::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: calc(var(--gutter) + 9rem);
+    /* The ground itself, not --scrim: held opaque past the bottom of the mark
+       and then faded out. At the top of the page it is indistinguishable from
+       the section behind it; further down it is what stops headings running
+       through the signature. */
+    background: linear-gradient(
+      var(--surface) 0 calc(var(--gutter) + 4.75rem),
+      transparent
+    );
+  }
+
   /* Leave clearance for the controls sharing this row. */
-  .cnav__mark { width: clamp(84px, 26vw, 120px); }
+  .cnav__mark { width: clamp(76px, 22vw, 108px); }
 
   .cnav__list {
     position: absolute;

@@ -4,14 +4,14 @@ import '../styles/base.css';
 import './dashboard.css';
 
 /**
- * Common chrome for the three project dashboards: title bar, live clock-style
+ * Common chrome for the project dashboards: title bar, live clock-style
  * status, accent theming and the route back to the portfolio.
  */
 export default function DashShell({ accent = 'acid', eyebrow, title, subtitle, status, children }) {
   useEffect(() => {
     document.title = `${title} — Parker Peterman`;
     return () => {
-      document.title = 'Parker Peterman — Data & Machine Learning';
+      document.title = 'Parker Peterman — Software & Data Engineering';
     };
   }, [title]);
 
