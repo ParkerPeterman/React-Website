@@ -68,7 +68,7 @@ export default function WorkRail() {
         <div className="rail__intro rail__panel">
           <p className="mono">Selected Work — 2024/26</p>
           <h2 className="rail__heading">
-            Pipelines,
+            Systems,
             <br />
             <span className="serif-em">models</span> &amp;
             <br />
@@ -77,7 +77,7 @@ export default function WorkRail() {
             they feed.
           </h2>
           <p className="rail__note">
-            Three builds, end to end. Each opens a live dashboard.
+            Five builds, end to end. Each opens a live dashboard.
           </p>
         </div>
 

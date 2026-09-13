@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import useReveal from '../lib/useReveal';
-import { experience, education, service } from '../data/site';
+import { experience, education } from '../data/site';
 import './Record.css';
 
 function Ledger({ title, entries }) {
@@ -55,17 +55,6 @@ export default function Record() {
       <div className="record__body shell">
         <Ledger title="Experience" entries={experience} />
         <Ledger title="Education" entries={education} />
-
-        <div className="record__group">
-          <h3 className="record__grouptitle mono">Community</h3>
-          <ul className="record__service">
-            {service.map((s, i) => (
-              <li key={i} data-rise>
-                {s}
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
     </section>
   );

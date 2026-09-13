@@ -12,14 +12,14 @@ export const identity = {
 };
 
 export const roles = [
-  'Data Analytics',
+  'Software Engineering',
   'Machine Learning',
-  'Business Intelligence',
-  'Dashboard Systems',
+  'Distributed Systems',
+  'Data Analytics',
 ];
 
 export const intro =
-  'I build the pipeline and the panel it lands on — from Python and SQL through to the interface a stakeholder actually reads.';
+  'I build the system and the panel it reports to — from Python services and SQL through to the interface a stakeholder actually reads.';
 
 export const projects = [
   {
@@ -91,28 +91,73 @@ export const projects = [
       ],
     },
   },
+  {
+    index: '04',
+    title: 'Campsite Rating Web App',
+    blurb:
+      'A React front end over a multi-criteria decision model that scores campsites against live OpenMeteo forecasts and the preferences a camper actually states.',
+    tags: ['React', 'OpenMeteo API', 'Decision Modelling', 'JavaScript'],
+    hash: '#campsite',
+    accent: 'violet',
+    metric: { value: '7-day', label: 'forecast window' },
+    preview: {
+      kind: 'bars',
+      chrome: 'score_campsite.js',
+      kpis: [
+        { label: 'Criteria', value: '6' },
+        { label: 'Forecast', value: '7d' },
+      ],
+      bars: [
+        { label: 'Precipitation', v: 88 },
+        { label: 'Temperature', v: 71 },
+        { label: 'Wind', v: 54 },
+        { label: 'Cloud cover', v: 40 },
+        { label: 'Daylight', v: 26 },
+      ],
+    },
+  },
+  {
+    index: '05',
+    title: 'Distributed File Synchronization System',
+    blurb:
+      'A Python client–server system keeping files in step across multiple devices, with multithreaded sockets for concurrent transfers and version logic that resolves conflicting edits.',
+    tags: ['Python', 'Sockets', 'Concurrency', 'Version Control'],
+    hash: '#sync',
+    accent: 'acid',
+    metric: { value: 'N-way', label: 'device sync' },
+    preview: {
+      kind: 'stream',
+      chrome: 'syncd · 4 peers',
+      kpis: [
+        { label: 'Peers', value: '4' },
+        { label: 'Conflicts', value: '0' },
+      ],
+      // Transfer throughput, MB/s. Loops seamlessly — the series is its period.
+      series: [42, 55, 48, 67, 59, 74, 63, 81, 58, 70, 52, 46],
+    },
+  },
 ];
 
 export const skills = [
   {
-    label: 'Databases',
-    body: 'Architecting relational databases in PostgreSQL, MySQL and T-SQL — data integrity and optimized query performance across large-scale datasets.',
+    label: 'Software Engineering & Scripting',
+    body: 'Python with Pandas and NumPy, SQL across PostgreSQL, MySQL and T-SQL, and JavaScript — React and CSS where the work has to reach an interface.',
   },
   {
-    label: 'Business Intelligence',
-    body: 'Power BI (DAX, Power Query) and Tableau Desktop for interactive dashboards, with Tableau Pulse and Power BI Copilot delivering automated insight to stakeholders.',
+    label: 'Cloud Infrastructure',
+    body: 'Distributed compute models, automated data pipeline orchestration and local database caching layers built to hold real-time throughput.',
   },
   {
-    label: 'ML & Statistics',
-    body: 'Predictive modelling and deep exploratory analysis in Python — Pandas for manipulation, NumPy for computation, Scikit-Learn for modelling.',
+    label: 'Systems Integration & Tooling',
+    body: 'ServiceNow integration, enterprise asset tracking and custom real-time metric aggregation — joining systems that were never designed to talk.',
   },
   {
-    label: 'Cloud Architecture',
-    body: 'Scalable data pipelines across AWS. Snowflake, Amazon Redshift and Google BigQuery warehouses, with ETL automated through Fivetran and Airbyte.',
+    label: 'Machine Learning & Modelling',
+    body: 'Training and evaluating models against real problems, from preparing untreated data through to findings a stakeholder can act on.',
   },
   {
-    label: 'Automation',
-    body: 'Reporting workflows streamlined in Excel via Power Query, VBA/Macros and Python in Excel — less manual processing, higher calculation accuracy.',
+    label: 'Methodology & Security',
+    body: 'Agile SDLC delivery with rapid iterations for stakeholder testing, worked to defense contract security compliance standards.',
   },
 ];
 
@@ -122,10 +167,9 @@ export const experience = [
     role: 'Software Engineer',
     period: 'Current',
     points: [
-      ['Software Development & Monitoring', 'Co-developed a real-time monitoring and tracking application visualizing core network infrastructure metrics.'],
-      ['Automation & Logic', 'Programmed automated logic evaluating system downtime against SLA contracts and automating MTTR calculations, reducing administrative overhead.'],
-      ['System Architecture', 'Architected a distributed compute model and local database caching layer to optimize real-time data flow and maintain operational uptime.'],
-      ['Quality Assurance', 'Contributed to debugging, technical problem identification and documentation of software components across operational workflows.'],
+      ['System Logic Development', 'Architected systems for database caching and process scheduling for applications running on local servers.'],
+      ['Automated Processes', 'Reduced the time for metric compilation by over 90%, freeing engineers to focus on network operability.'],
+      ['Production Environment', 'Worked in an Agile SDLC environment to rapidly produce iterations of code for stakeholder testing.'],
     ],
   },
   {
@@ -133,32 +177,24 @@ export const experience = [
     role: 'Technical Operations Team',
     period: 'Previous',
     points: [
-      ['Security Compliance', 'Operated within a strictly controlled environment, maintaining defense contract security compliance standards.'],
-      ['Systems Integration', 'Integrated ServiceNow ticketing data to engineer, maintain and optimize real-time operational health dashboards.'],
-      ['Deployment', 'Imaged organizational systems with custom, department-specific software configurations based on individual user roles.'],
-      ['Diagnostics', 'Resolved complex hardware, software and configuration issues with detailed documentation for organizational assets.'],
+      ['Defense Contracting Security Compliance', 'Followed DOD guidelines for working within a strict defense contract environment.'],
+      ['Systems Integration & Analytics', 'Integrated ServiceNow ticketing data to engineer real-time operational health dashboards.'],
+      ['Shop Floor Operations', 'Traveled to multiple job sites to run operational checks, ensuring that all assets were working properly.'],
+      ['Infrastructure Management', 'Ran infrastructure for all-hands livestreams and managed server-based Linux remote desktops.'],
     ],
   },
 ];
 
 export const education = [
   {
-    org: "Western Governors University",
+    org: 'Western Governors University',
     role: "Bachelor's in Data Analytics",
     period: 'Oct 2024 — Oct 2026',
-    points: [['4.0 GPA', 'Data Analytics major, Mathematics minor.']],
+    points: [
+      ['4.0 GPA', 'Data Analytics major.'],
+      ['Societies', 'Honors Society member and Data Club member.'],
+    ],
   },
-  {
-    org: 'Maize High School',
-    role: 'Diploma',
-    period: 'Sep 2020 — May 2024',
-    points: [['4.2 GPA', 'National Honors Society.']],
-  },
-];
-
-export const service = [
-  'Collaborated with local and state government bodies to rename a street near my high school in commemoration of our principal battling cancer, and spoke at fundraising events.',
-  'Led an effort to landscape homes owned by community members with disabilities, and abandoned properties, to beautify the neighborhood.',
 ];
 
 // `mono: true` renders the mark as a flat bone silhouette instead of restoring
@@ -171,18 +207,22 @@ export const certifications = [
   { img: '/udacity_logo.webp', title: 'Data Analytics Nanodegree', issuer: 'Udacity', date: 'Apr 2026' },
 ];
 
+// `ink: true` marks artwork that is a single flat colour at source and would
+// otherwise sink into one ground or the other — GitHub is #1b1f23, MySQL
+// #00546b, and the AWS wordmark #252f3e. Those follow the theme; every other
+// mark keeps its own colour, which is the point of the row.
 export const stack = [
   { src: '/python.svg', alt: 'Python' },
   { src: '/postgresql.svg', alt: 'PostgreSQL' },
-  { src: '/mysql-icon-light.svg', alt: 'MySQL' },
-  { src: '/aws_light.svg', alt: 'AWS' },
+  { src: '/mysql-icon-light.svg', alt: 'MySQL', ink: true },
+  { src: '/aws_light.svg', alt: 'AWS', ink: true },
   { src: '/react_light.svg', alt: 'React' },
   { src: '/javascript.svg', alt: 'JavaScript' },
   { src: '/html5.svg', alt: 'HTML5' },
   { src: '/css_old.svg', alt: 'CSS' },
   { src: '/c-plusplus.svg', alt: 'C++' },
   { src: '/microsoft-excel.svg', alt: 'Excel' },
-  { src: '/github_light.svg', alt: 'GitHub' },
+  { src: '/github_light.svg', alt: 'GitHub', ink: true },
 ];
 
 export const sections = [

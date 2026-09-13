@@ -74,13 +74,13 @@ export default function Credentials() {
 
       <div className="cred__stack">
         <Marquee
-          items={['Python', 'SQL', 'AWS', 'Power BI', 'Tableau', 'Scikit-Learn', 'React']}
+          items={['Python', 'SQL', 'React', 'JavaScript', 'AWS', 'Scikit-Learn', 'PostgreSQL']}
           accent="violet"
           speed={30}
         />
         <ul className="cred__logos shell">
           {stack.map((s) => (
-            <li key={s.alt}>
+            <li key={s.alt} className={s.ink ? 'is-ink' : ''}>
               <img src={s.src} alt={s.alt} loading="lazy" />
             </li>
           ))}

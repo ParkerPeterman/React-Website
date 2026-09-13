@@ -20,11 +20,15 @@ import Footer from './components/Footer';
 import RentalDashboard from './dashboards/RentalDashboard';
 import CensusDashboard from './dashboards/CensusDashboard';
 import NOCDashboard from './dashboards/NOCDashboard';
+import CampsiteDashboard from './dashboards/CampsiteDashboard';
+import SyncDashboard from './dashboards/SyncDashboard';
 
 const DASHBOARDS = {
   '#rental': RentalDashboard,
   '#census': CensusDashboard,
   '#noc': NOCDashboard,
+  '#campsite': CampsiteDashboard,
+  '#sync': SyncDashboard,
 };
 
 /** Minimal hash router — keeps the dashboards addressable without a dep. */
@@ -60,7 +64,7 @@ function Site() {
         <Hero />
 
         <Marquee
-          items={['Data Engineering', 'Machine Learning', 'Analytics', 'Dashboards']}
+          items={['Software Engineering', 'Machine Learning', 'Distributed Systems', 'Analytics']}
           accent="acid"
         />
 

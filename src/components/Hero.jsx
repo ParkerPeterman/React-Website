@@ -1,9 +1,67 @@
-import { useRef } from 'react';
+import { useCallback, useLayoutEffect, useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import { gsap, prefersReducedMotion } from '../lib/motion';
 import { identity, intro } from '../data/site';
 import RoleCycle from './RoleCycle';
 import './Hero.css';
+
+/* Reference size the name is measured at, and the ceiling it may reach. A
+   viewport-relative font-size cannot know how wide "PETERMAN" actually sets,
+   so the name is measured once per width and scaled to the measure instead. */
+const MEASURE_PX = 200;
+const MAX_PX = 240;
+
+function useFitName(nameRef) {
+  const fittedFor = useRef(0);
+
+  const fit = useCallback(() => {
+    const name = nameRef.current;
+    if (!name) return;
+
+    // Font-size does not change the block's own width, so keying on it is a
+    // stable guard against the ResizeObserver re-entering on our own write.
+    const width = name.clientWidth;
+    if (!width || width === fittedFor.current) return;
+    fittedFor.current = width;
+
+    const lines = name.querySelectorAll('.hero__line');
+    if (!lines.length) return;
+
+    name.style.fontSize = `${MEASURE_PX}px`;
+
+    let ratio = Infinity;
+    lines.forEach((line) => {
+      // clientWidth is the room left after the line's own indent; the mask is
+      // width: max-content, so its offsetWidth is the unwrapped set width.
+      const natural = line.firstElementChild.offsetWidth;
+      if (natural > 0) ratio = Math.min(ratio, line.clientWidth / natural);
+    });
+
+    name.style.fontSize = Number.isFinite(ratio)
+      ? `${Math.min(MEASURE_PX * ratio, MAX_PX)}px`
+      : '';
+  }, [nameRef]);
+
+  useLayoutEffect(() => {
+    const name = nameRef.current;
+    if (!name) return;
+
+    const remeasure = () => {
+      fittedFor.current = 0;
+      fit();
+    };
+
+    fit();
+
+    const observer = new ResizeObserver(fit);
+    observer.observe(name);
+
+    // Fallback metrics set narrower than Archivo — refit once it lands.
+    document.fonts?.ready.then(remeasure);
+
+    return () => observer.disconnect();
+  }, [fit, nameRef]);
+}
 
 /**
  * Two oversized name lines that split apart as you scroll — the last name
@@ -12,6 +70,9 @@ import './Hero.css';
  */
 export default function Hero() {
   const root = useRef(null);
+  const name = useRef(null);
+
+  useFitName(name);
 
   useGSAP(
     () => {
@@ -79,7 +140,7 @@ export default function Hero() {
 
   return (
     <section className="hero" id="index" ref={root}>
-      <h1 className="hero__name">
+      <h1 className="hero__name" ref={name}>
         <span className="sr-only">
           {identity.first} {identity.last}
         </span>

@@ -29,10 +29,15 @@
   color: var(--acid);
 }
 
+/* max-content, not the default full width: scrollWidth is floored at
+   clientWidth, so a full-width mask can never report how wide the name
+   actually sets — which is exactly what the fit pass needs to measure. */
 .hero__mask {
   display: block;
+  width: max-content;
   overflow: hidden;
   padding-bottom: 0.06em; /* room for descenders inside the mask */
+  white-space: nowrap;
 }
 
 .hero__char {
@@ -103,9 +108,26 @@
 @media (max-width: 860px) {
   .hero { justify-content: center; padding-top: 6rem; }
 
+  .hero__name { margin-bottom: clamp(1.5rem, 4vh, 2.5rem); }
   .hero__line--last { margin-left: 0.6rem; }
 
   .hero__meta { display: flex; flex-direction: column; align-items: flex-start; gap: 1.75rem; }
   .hero__intro, .hero__role, .hero__contact { max-width: none; text-align: left; }
   .hero__scrollcue { display: none; }
+}
+
+/* Phones: the name is already fit to the measure, so the remaining work is
+   giving the meta block enough room under it. */
+@media (max-width: 520px) {
+  .hero { padding-top: 5rem; }
+
+  .hero__name {
+    letter-spacing: -0.035em;
+    margin-bottom: 1.75rem;
+  }
+
+  .hero__line--last { margin-left: 0.35rem; }
+
+  .hero__meta { gap: 1.35rem; }
+  .hero__contact { gap: 0.2rem; }
 }
