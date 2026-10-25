@@ -1,0 +1,8 @@
+# Dependencies: npm install recreates them from package-lock.json
+node_modules/
+
+# Local env and editor files
+.env
+.env.*
+*.local
+.DS_Store
