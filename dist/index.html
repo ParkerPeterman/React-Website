@@ -3,34 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#08080A">
-    <title>Parker Peterman — Software & Data Engineering</title>
-    <meta name="description" content="Parker Peterman builds software systems, data pipelines and machine learning models — and the dashboards stakeholders actually read.">
+    <meta name="theme-color" content="#E7EEE0">
+    <title>Parker Peterman | Data and ML engineer</title>
+    <meta name="description" content="Parker Peterman builds data pipelines and ML systems that show their work: case studies with real numbers, and the spec for a two-node GPU homelab.">
 
-    <link rel="icon" type="image/svg+xml" href="/Logo.svg">
+    <link rel="canonical" href="https://parkerpeterman.com/">
+
+    <!-- Link previews (LinkedIn, Slack, iMessage, X). Scrapers need absolute URLs. -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Parker Peterman">
+    <meta property="og:url" content="https://parkerpeterman.com/">
+    <meta property="og:title" content="Parker Peterman | Data and ML engineer">
+    <meta property="og:description" content="Data pipelines and ML systems that show their work: case studies with real numbers, and the spec for a two-node GPU homelab.">
+    <meta property="og:image" content="https://parkerpeterman.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Parker Peterman, data and ML engineer: a drawing of his health data system on engineering paper">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
     <!-- Resolve the theme before first paint: a stored choice wins, otherwise
-         follow the OS. Running this in <head> avoids a flash of the wrong
-         theme, which a React effect could not prevent. -->
+         follow the OS. 'light' is paper, 'dark' is blueprint. Running this in
+         <head> avoids a flash of the wrong drawing style. -->
     <script>
       (function () {
         try {
           var stored = localStorage.getItem('theme');
           var theme = stored === 'light' || stored === 'dark'
             ? stored
-            : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+            : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
           document.documentElement.dataset.theme = theme;
+          if (theme === 'dark') {
+            document.querySelector('meta[name="theme-color"]').setAttribute('content', '#1B3D6E');
+          }
         } catch (e) {
-          document.documentElement.dataset.theme = 'dark';
+          document.documentElement.dataset.theme = 'light';
         }
       })();
     </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,75..125,100..900;1,75..125,100..900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <script type="module" crossorigin src="/assets/index-Dce6irGE.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-CnkkKG5I.css">
+    <link href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,400;0,600;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/assets/index-DC07VYLW.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DSwPmsbx.css">
 </head>
 <body>
     <div id="root"></div>
