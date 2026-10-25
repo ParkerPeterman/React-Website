@@ -1,0 +1,93 @@
+/* Homelab spec page */
+
+.lab__hw {
+  display: grid;
+  gap: 1.5rem;
+}
+.lab__hw .rackfig { width: 100%; max-width: 30rem; }
+
+.guests { min-width: 47.5rem; }
+.guests td:last-child { color: var(--ink-2); }
+
+/* --- Architecture figure ---------------------------------------------------- */
+
+.arch__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 2.25rem minmax(0, 0.9fr) 2.25rem minmax(0, 1.6fr);
+  align-items: center;
+  padding: 1.25rem;
+}
+
+.arch__col { display: grid; gap: 1rem; }
+
+.arch__box {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: var(--w-object) solid var(--ink);
+  background: var(--paper);
+  font-family: var(--font-letter);
+  font-size: var(--fs-ui);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.arch__box.is-planned { border-style: dashed; border-color: var(--redline); background: var(--redline-wash); }
+.arch__box ul { display: grid; gap: 0.25rem; }
+.arch__box li.is-planned { color: var(--redline); }
+.arch__box li.is-planned::after { content: ' (planned)'; font-style: italic; }
+
+.arch__host { gap: 0.5rem; }
+.arch__hostname {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: var(--fs-ui);
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.arch__chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.arch__chips span { padding: 1px 0.5rem; border: var(--w-thin) solid var(--ink); background: var(--paper-raise); color: var(--ink); }
+
+.arch__vms { display: grid; grid-template-columns: max-content 1fr; gap: 0.25rem 0.75rem; }
+.arch__vms dt { font-weight: 700; color: var(--ink); }
+
+/* A wire with an arrowhead between columns. */
+.arch__wire {
+  position: relative;
+  align-self: center;
+  height: 0;
+  border-top: var(--w-object) solid var(--ink);
+}
+.arch__wire::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  top: -6px;
+  border: 5px solid transparent;
+  border-left: 8px solid var(--ink);
+  border-right: 0;
+}
+
+.arch__legend { margin-top: 0.5rem; }
+
+@container sheet (max-width: 66.25rem) {
+  .arch__grid { grid-template-columns: 1fr; gap: 0; }
+  .arch__wire {
+    justify-self: center;
+    width: 0;
+    height: 1.75rem;
+    border-top: 0;
+    border-left: var(--w-object) solid var(--ink);
+  }
+  .arch__wire::after {
+    right: auto;
+    left: -6px;
+    top: auto;
+    bottom: -1px;
+    border: 5px solid transparent;
+    border-top: 8px solid var(--ink);
+    border-bottom: 0;
+  }
+}

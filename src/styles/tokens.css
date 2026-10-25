@@ -1,118 +1,111 @@
 /* ==========================================================================
    DESIGN TOKENS
-   Restrained palette, bold application. Three accents used sparingly — one per
-   project, never two in one element.
+   The site is a drawing set. Paper is green engineering computation paper;
+   the dark theme is a cyanotype blueprint. Line weight carries meaning the
+   way it does on a real drawing:
 
-   Tokens are semantic, not literal: --surface is the ground and --text is what
-   sits on it, whichever way round the theme is. Dark is the default; the light
-   block below overrides only what must change.
+     --w-frame   sheet borders and title blocks      (thick)
+     --w-object  boxes, tables, objects being drawn  (medium)
+     --w-thin    leaders, dimensions, grid rules     (thin)
+     dashed      planned / not built yet             (any weight)
 
-   The theme is resolved to a data-theme attribute on <html> by an inline
-   script in index.html before first paint, so there is no flash and CSS only
-   ever needs to match [data-theme="light"].
+   Redline is reserved for markup: planned work, the selected part of a
+   figure, and the one value a chart is about. Never decoration.
+
+   The theme is resolved to data-theme on <html> by the inline script in
+   index.html before first paint. 'light' is paper, 'dark' is blueprint.
    ========================================================================== */
 
 :root {
-  /* --- Ground ------------------------------------------------------------ */
-  --surface:        #08080A;
-  --surface-raise:  #0F0F13;
-  --surface-hover:  #121216;
-  --line:           #1C1C22;
+  /* --- Paper ------------------------------------------------------------- */
+  --paper:        #E7EEE0;
+  --paper-raise:  #F1F5EC;
+  --paper-sunk:   #DDE6D5;
+  --grid-minor:   rgba(70, 120, 84, 0.13);
+  --grid-major:   rgba(70, 120, 84, 0.24);
 
-  /* Translucent grounds for sticky bars and overlays. */
-  --scrim:          rgba(8, 8, 10, 0.86);
-  --scrim-solid:    rgba(8, 8, 10, 0.94);
-  --row-hover:      rgba(255, 255, 255, 0.025);
+  /* --- Ink --------------------------------------------------------------- */
+  --ink:    #1C2433;
+  --ink-2:  #414B5B;
+  --ink-3:  #5A6371;
 
-  /* --- Type -------------------------------------------------------------- */
-  --text:       #EDE8DF;
-  --text-dim:   rgba(237, 232, 223, 0.62);
-  --text-faint: rgba(237, 232, 223, 0.34);
+  --redline:      #B42318;
+  --redline-wash: rgba(180, 35, 24, 0.08);
 
-  /* --- Accents ----------------------------------------------------------- */
-  --acid:       #C6F24E;
-  --violet:     #7B4DFF;
-  --ember:      #FF4D23;
+  /* Chart marks: validated pair (dataviz validator, light, on --paper). */
+  --mark:       #2F67A8;
+  --mark-hi:    #C62A1E;
 
-  --accent:     var(--acid);
+  --scrim: rgba(231, 238, 224, 0.94);
 
-  /* --- Status ------------------------------------------------------------ */
-  --good: #4ADE80;
-  --warn: #FACC15;
-  --bad:  var(--ember);
-
-  /* Normalizes logo artwork to a flat silhouette. Source fills across these
-     assets run from #0A0B0A to #fff, so neither raw colour nor a single
-     brightness pass is legible on both grounds. */
-  --logo-filter: brightness(0) invert(1);
-
-  /* Resting treatment for full-colour badge artwork: lifted on dark so the
-     mid-tones don't sink into the ground, held back on light. */
-  --badge-rest-filter: grayscale(1) brightness(1.5);
+  /* --- Line weights ------------------------------------------------------ */
+  --w-frame:  2px;
+  --w-object: 1.5px;
+  --w-thin:   1px;
 
   /* --- Families ---------------------------------------------------------- */
-  --font-display: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
-  --font-body:    'Archivo', 'Helvetica Neue', Arial, sans-serif;
-  --font-serif:   'Instrument Serif', Georgia, serif;
-  --font-mono:    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  /* Overpass is an open revival of Highway Gothic, the lettering written
+     into the FHWA sign standards: engineering lettering that stays legible
+     small. Source Serif carries the reading text, the way an engineering
+     handbook sets prose in serif and figures in sans. */
+  --font-letter: 'Overpass', 'Highway Gothic', 'Segoe UI', system-ui, sans-serif;
+  --font-text:   'Source Serif 4', 'Source Serif Pro', Georgia, serif;
 
-  /* --- Scale ------------------------------------------------------------- */
-  --t-mega:  clamp(3.2rem, 15.5vw, 16rem);
-  --t-xl:    clamp(2.4rem, 8vw, 7rem);
-  --t-lg:    clamp(1.8rem, 4.4vw, 3.4rem);
-  --t-md:    clamp(1.25rem, 2.2vw, 1.75rem);
-  --t-body:  clamp(1rem, 1.15vw, 1.15rem);
-  --t-sm:    0.875rem;
-  --t-mono:  0.7rem;
+  /* --- Scale: body 16, secondary 14, meta 12; headings step up ----------- */
+  --fs-label: 0.75rem;     /* 12px, meta */
+  --fs-ui:    0.875rem;    /* 14px, secondary */
+  --fs-text:  1rem;        /* 16px, body */
+  --fs-lede:  1.125rem;    /* 18px */
+  --fs-h3:    1.25rem;     /* 20px */
+  --fs-h2:    clamp(1.6rem, 2.6vw, 2.05rem);
+  --fs-hero:  clamp(2rem, 4.6vw, 3.45rem);
 
-  /* --- Rhythm ------------------------------------------------------------ */
-  --gutter:  clamp(1.25rem, 4vw, 4.5rem);
-  --bay:     clamp(6rem, 14vh, 11rem);
+  /* --- Layout ------------------------------------------------------------ */
+  --sheet-max: 77.5rem;
+  --gutter:    clamp(1rem, 3.2vw, 2.5rem);
+  --pad:       clamp(1.25rem, 3vw, 2.25rem);
+  --measure:   66ch;
+
+  /* --- Viewports: narrow < 768 <= medium; 1280 is the wide prove --------- */
+  /* Components that depend on their own width use container queries on
+     .sheet__body (container name: sheet) instead of extra breakpoints.
+     Sizes are in rem so the whole sheet grows with the root size on large
+     windows (see html in base.css); only line weights stay in px. */
 
   /* --- Motion ------------------------------------------------------------ */
-  --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-io:   cubic-bezier(0.76, 0, 0.24, 1);
-
-  --z-cursor:   9000;
-  --z-preload:  8000;
-  --z-nav:      7000;
-  --z-rail:     6000;
+  --dur-quick: 150ms;
+  --dur-base:  300ms;
+  /* Optical exception: the one-time draw-on of Figure 1 runs longer than the
+     300ms ceiling so the sweep reads as linework being drawn, not a flash. */
+  --dur-draw:  900ms;
+  --ease:      cubic-bezier(0.2, 0.7, 0.2, 1); /* ease-out */
 }
 
 /* ==========================================================================
-   LIGHT
-   Warm paper rather than white — pure #fff under this much oversized type is
-   glaring. The accents are darkened: #C6F24E sits at roughly 1.2:1 on paper
-   and is unusable for text, so each drops to a value that clears 4.5:1.
+   BLUEPRINT
+   Ink and paper swap: pale linework on cyanotype blue. Markup moves from red
+   pencil to yellow, as it did on real prints.
    ========================================================================== */
 
-:root[data-theme='light'] {
-  --surface:        #F4F1EA;
-  --surface-raise:  #FBF9F4;
-  --surface-hover:  #FFFFFF;
-  --line:           #DED8CC;
+:root[data-theme='dark'] {
+  --paper:        #1B3D6E;
+  --paper-raise:  #20467C;
+  --paper-sunk:   #173562;
+  --grid-minor:   rgba(214, 228, 250, 0.08);
+  --grid-major:   rgba(214, 228, 250, 0.15);
 
-  --scrim:          rgba(244, 241, 234, 0.86);
-  --scrim-solid:    rgba(244, 241, 234, 0.96);
-  --row-hover:      rgba(20, 20, 26, 0.035);
+  --ink:    #EAF1FB;
+  --ink-2:  #C3D2E8;
+  --ink-3:  #A3B6D3;
 
-  --text:       #131318;
-  --text-dim:   rgba(19, 19, 24, 0.68);
-  --text-faint: rgba(19, 19, 24, 0.45);
+  --redline:      #F2BE55;
+  --redline-wash: rgba(242, 190, 85, 0.12);
 
-  --acid:       #4F6B00;
-  --violet:     #5B2EE5;
-  --ember:      #C43A12;
+  /* Validated pair on --paper (dark). Slightly above the validator's dark
+     lightness band, which assumes a near-black ground; this ground is
+     mid-blue, so contrast is the binding check and both clear 3:1. */
+  --mark:       #74A9E8;
+  --mark-hi:    #E8A93C;
 
-  --good: #17803D;
-  --warn: #8A6100;
-  --bad:  var(--ember);
-
-  --logo-filter: brightness(0);
-  --badge-rest-filter: grayscale(1) brightness(0.96);
+  --scrim: rgba(27, 61, 110, 0.95);
 }
-
-/* Accent utility — set --accent on any subtree to recolor its highlights. */
-.a-acid   { --accent: var(--acid); }
-.a-violet { --accent: var(--violet); }
-.a-ember  { --accent: var(--ember); }

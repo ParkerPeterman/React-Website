@@ -1,0 +1,63 @@
+.contact__lede { margin-top: 0.75rem; }
+
+.contact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 2rem 3rem;
+  align-items: start;
+}
+
+.contact__direct {
+  border: var(--w-object) solid var(--ink);
+  background: var(--paper-raise);
+}
+.contact__direct dt { border-right: var(--w-thin) solid var(--ink); }
+.contact__direct dd a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  overflow-wrap: anywhere;
+}
+.contact__direct dd a:hover { text-decoration-color: var(--redline); text-decoration-thickness: 2px; }
+.contact__email { font-weight: 700; }
+
+.contact__form { display: grid; gap: 1rem; }
+.contact__formtitle { font-size: var(--fs-ui); }
+
+.field { display: grid; gap: 0.5rem; }
+.field label {
+  font-family: var(--font-letter);
+  font-size: var(--fs-label);
+  font-weight: 700;
+  color: var(--ink);
+}
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 0.75rem 0.75rem;
+  border: var(--w-object) solid var(--ink);
+  border-radius: 0;
+  background: var(--paper-raise);
+  color: var(--ink);
+  font-family: var(--font-text);
+  font-size: var(--fs-text);
+  line-height: 1.5;
+}
+.field textarea { resize: vertical; min-height: 7.5rem; }
+.field [aria-invalid='true'] { border-color: var(--redline); border-width: var(--w-frame); }
+.field__error {
+  font-family: var(--font-letter);
+  font-size: var(--fs-ui);
+  color: var(--redline);
+}
+.field input:focus-visible,
+.field textarea:focus-visible { outline: 2px solid var(--redline); outline-offset: 0; }
+
+.contact__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; }
+.contact__actions .btn[disabled] { opacity: 0.7; cursor: progress; }
+.contact__status { color: var(--ink-2); }
+.contact__status a { text-decoration: underline; }
+
+@media (max-width: 767.98px) {
+  .contact { grid-template-columns: 1fr; }
+}

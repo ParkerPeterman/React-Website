@@ -1,22 +1,14 @@
-.footer {
-  border-top: 1px solid var(--line);
-  padding-block: 2rem;
-}
-
-.footer__inner {
+.foot {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.5rem 1.5rem;
+  width: min(100% - 2 * var(--gutter), var(--sheet-max));
+  margin: 0 auto;
+  padding: 0.5rem 0 2.5rem;
+  font-family: var(--font-letter);
+  font-size: var(--fs-label);
+  color: var(--ink-3);
 }
-
-.footer__top {
-  color: var(--text-dim);
-  transition: color 0.35s var(--ease-out);
-}
-.footer__top:hover { color: var(--acid); }
-
-@media (max-width: 640px) {
-  .footer__built { order: 3; width: 100%; }
-}
+.foot a { color: var(--ink-2); text-decoration: underline; text-underline-offset: 0.2em; }
+.foot a:hover { color: var(--ink); }

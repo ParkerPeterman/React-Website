@@ -1,0 +1,58 @@
+.exp {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 2rem 3rem;
+  align-items: start;
+}
+
+.exp__jobs { display: grid; gap: 0; }
+.exp__job { padding: 1.5rem 0; border-top: var(--w-object) solid var(--ink); }
+.exp__job:first-child { padding-top: 0; border-top: 0; }
+
+.exp__head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.25rem 1rem;
+  margin-bottom: 0.75rem;
+}
+.exp__role { font-size: var(--fs-h3); }
+.exp__org { grid-column: 1; color: var(--ink-2); }
+.exp__period {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: start;
+  padding: 0.25rem 0.5rem;
+  border: var(--w-thin) solid var(--ink);
+  font-size: var(--fs-label);
+}
+
+.exp__points { display: grid; gap: 0.5rem; color: var(--ink-2); max-width: 64ch; }
+.exp__points li { position: relative; padding-left: 1.5rem; }
+.exp__points li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.8em;
+  width: 0.875rem;
+  border-top: var(--w-object) solid var(--ink);
+}
+
+.exp__side { display: grid; gap: 1.75rem; }
+.exp__block {
+  padding: 1.25rem 1.25rem;
+  border: var(--w-object) solid var(--ink);
+  background: var(--paper-raise);
+}
+.exp__h { font-size: var(--fs-ui); margin-bottom: 0.75rem; }
+.exp__school { font-size: var(--fs-text); }
+.exp__dim { color: var(--ink-3); font-size: var(--fs-label); }
+.exp__notes { margin-top: 0.5rem; color: var(--ink-2); }
+
+.exp__certs { font-size: var(--fs-ui); }
+.exp__certs th { font-weight: 700; }
+.exp__certs td { white-space: nowrap; width: 1%; }
+.exp__issuer { display: block; font-weight: 400; color: var(--ink-3); }
+
+@media (max-width: 767.98px) {
+  .exp { grid-template-columns: 1fr; }
+}

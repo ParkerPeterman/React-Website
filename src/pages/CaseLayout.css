@@ -1,0 +1,152 @@
+/* Case-study pages: one sheet, set out like a spec document. */
+
+.case__back { margin-bottom: 1.25rem; }
+
+.case__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(17.5rem, 1fr);
+  gap: 1.75rem 3rem;
+  align-items: start;
+  padding-bottom: 2rem;
+  border-bottom: var(--w-frame) solid var(--ink);
+}
+
+.case__kind { color: var(--ink-3); font-size: var(--fs-label); }
+.case__title {
+  margin: 0.5rem 0 1rem;
+  font-size: var(--fs-hero);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  max-width: 18ch;
+}
+.case__title:focus:not(:focus-visible) { outline: none; }
+.case__summary { max-width: 62ch; }
+
+.case__facts {
+  border: var(--w-object) solid var(--ink);
+  background: var(--paper-raise);
+}
+.case__facts dt { border-right: var(--w-thin) solid var(--ink); }
+.case__facts dd a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  overflow-wrap: anywhere;
+}
+.case__facts dd a:hover { text-decoration-color: var(--redline); text-decoration-thickness: 2px; }
+
+/* Sections: number and title in a narrow left column, content right. */
+.case__sec {
+  display: grid;
+  grid-template-columns: minmax(10.625rem, 0.28fr) minmax(0, 1fr);
+  gap: 1rem 2.5rem;
+  padding: 2.25rem 0;
+  border-bottom: var(--w-thin) solid var(--ink);
+}
+.case__sec--wide { grid-template-columns: 1fr; }
+.case__sec--wide .case__sectitle { position: static; }
+
+.case__sectitle {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  font-size: var(--fs-h3);
+  align-self: start;
+  position: sticky;
+  top: 5.375rem;
+}
+.case__secno {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: var(--w-object) solid var(--ink);
+  border-radius: 50%;
+  font-size: var(--fs-label);
+  transform: translateY(-2px);
+}
+
+.case__seccontent { display: grid; gap: 1.5rem; min-width: 0; }
+.case__seccontent > p,
+.case__seccontent > .prose { max-width: var(--measure); color: var(--ink-2); }
+.case__seccontent h3 { font-size: var(--fs-ui); margin-bottom: -0.75rem; }
+
+.case__shots {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: start;
+}
+.case__shots--wide { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.case__stack { display: grid; gap: 1rem; align-content: start; }
+
+.case__next {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  padding-top: 1.75rem;
+}
+.case__nextlink { font-size: var(--fs-h3); }
+
+.ticks { display: grid; gap: 0.75rem; max-width: var(--measure); color: var(--ink-2); }
+.ticks li { position: relative; padding-left: 1.5rem; }
+.ticks li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.8em;
+  width: 0.875rem;
+  border-top: var(--w-object) solid var(--ink);
+}
+.ticks strong { color: var(--ink); font-weight: 600; }
+
+/* Step diagram for real sequences (pipelines, shutdown order). */
+.steps { display: grid; gap: 0; counter-reset: step; }
+.steps li {
+  counter-increment: step;
+  display: grid;
+  grid-template-columns: 2.125rem minmax(0, 1fr);
+  gap: 1rem;
+  position: relative;
+  padding-bottom: 1.25rem;
+}
+.steps li::before {
+  content: counter(step);
+  display: grid;
+  place-items: center;
+  width: 1.875rem;
+  height: 1.875rem;
+  border: var(--w-object) solid var(--ink);
+  background: var(--paper-raise);
+  font-family: var(--font-letter);
+  font-size: var(--fs-label);
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
+}
+.steps li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 0.9375rem;
+  top: 1.875rem;
+  bottom: 0;
+  border-left: var(--w-object) solid var(--ink);
+}
+.steps b { font-family: var(--font-letter); font-size: var(--fs-ui); display: block; }
+.steps span { color: var(--ink-2); }
+
+@media (max-width: 767.98px) {
+  .case__head { grid-template-columns: 1fr; }
+  .case__sec { grid-template-columns: 1fr; padding: 1.75rem 0; }
+  .case__sec--wide { grid-template-columns: 1fr; }
+.case__sec--wide .case__sectitle { position: static; }
+
+.case__sectitle { position: static; }
+}
+
+@media (max-width: 767.98px) {
+  .case__shots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .case__shots--wide { grid-template-columns: 1fr; }
+}

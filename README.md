@@ -1,233 +1,54 @@
-# Parker Peterman Portfolio - React Version
+# parkerpeterman.com
 
-This is your personal portfolio website converted to React. There are two versions provided:
+Portfolio site for Parker Peterman, data and ML engineer. It's laid out as an engineering drawing set:
+green computation paper by default, with a blueprint theme behind the Paper / Blueprint switch. Every
+figure is plotted from the projects' own data, and every claim links to something a reader can check.
 
-1. **Single-file version** (App.jsx) - All code in one file for simplicity
-2. **Modular version** (components folder) - Split into reusable components for better organization
+## Run it
 
-## Setup Instructions
-
-### Prerequisites
-- Node.js (version 16 or higher)
-- npm or yarn
-
-### Installation
-
-1. **Install dependencies:**
 ```bash
 npm install
+npm run dev       # http://localhost:5173
+npm run build     # writes dist/
+npm run preview   # serves dist/
 ```
 
-2. **Start development server:**
-```bash
-npm run dev
-```
+React 19 and Vite, with no other runtime dependencies. Routing is a small hash router in `src/App.jsx`.
 
-3. **Build for production:**
-```bash
-npm run build
-```
+## Where things live
 
-4. **Preview production build:**
-```bash
-npm run preview
-```
+| Path | What it holds |
+|---|---|
+| `src/data/site.js` | Name, contact, intro, skills parts list, experience, education, certifications |
+| `src/data/projects.js` | Project index, plus the measured numbers behind every chart (with sources) |
+| `src/data/healthSystem.js` | Figure 1: the parts, notes and edge geometry of the health system diagram |
+| `src/data/homelab.js` | Homelab spec at the architecture level, with a `status` on each part |
+| `src/pages/` | Case-study pages (`#health`, `#rental`, `#census`, `#outage`) and the lab spec (`#homelab`) |
+| `src/components/` | The home page sheets, the diagram, the rack drawing, and the charts |
+| `src/styles/tokens.css` | Colours, type scale, line weights, motion tokens for both themes |
 
-## File Structure
+Copy changes go in `src/data/` or the page files; components stay presentational.
 
-### Single-File Version (Current)
-```
-/
-├── index.html          # HTML entry point
-├── main.jsx            # React entry point
-├── App.jsx             # Main component (entire site)
-├── App.css             # All styles
-├── package.json        # Dependencies
-├── vite.config.js      # Vite configuration
-└── public/             # Static assets (images, videos)
-    ├── 20251004_121924.jpg
-    ├── PortfolioVideo.mp4
-    ├── Amazon_Web_Services_Logo.svg
-    ├── data+_picture.png
-    ├── project+_picture.webp
-    └── udacity_logo.webp
-```
+### Homelab status marks
 
-### Modular Version (Recommended for scaling)
-See the `components/` folder for individual component files:
-- `Header.jsx` - Top navigation and profile
-- `AboutSection.jsx` - About me section
-- `Certifications.jsx` - Certification carousel
-- `Resume.jsx` - Education, skills, experience
-- `ContactForm.jsx` - Contact form
-- `Footer.jsx` - Footer component
+Each part in `src/data/homelab.js` has `status: 'running'` or `'planned'`. Running parts are drawn solid
+and planned parts dashed in redline, in the rack drawing, the architecture figure and every table. When
+something gets built, flip its status and everything follows.
 
-## Mobile Responsiveness
+The public spec leaves out IP addresses, ports and hostnames on purpose. Keep
+`homelab-tech-spec.txt` out of the repo: the repo is public, and that file has the full network plan.
 
-✅ **You DON'T need separate files for mobile!** 
+## Conventions
 
-The CSS already handles mobile with media queries:
-- `@media (max-width: 768px)` - Tablet/mobile
-- `@media (max-width: 480px)` - Small mobile
-- `@media (min-width: 1024px)` - Desktop
-
-React automatically uses the same CSS breakpoints, so your site is fully responsive out of the box!
-
-## Key Differences from Vanilla HTML/JS
-
-### 1. **State Management**
-Instead of DOM manipulation, React uses state:
-```javascript
-// Old way (vanilla JS)
-document.getElementById('theme-toggle').addEventListener('click', () => {
-  document.body.classList.toggle('light-mode');
-});
-
-// New way (React)
-const [theme, setTheme] = useState('dark');
-const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
-```
-
-### 2. **Event Handlers**
-```javascript
-// Old: onclick attribute
-<button onclick="handleClick()">Click</button>
-
-// New: onClick prop
-<button onClick={handleClick}>Click</button>
-```
-
-### 3. **Dynamic Content**
-```javascript
-// Old: innerHTML manipulation
-element.innerHTML = data.map(item => `<div>${item}</div>`).join('');
-
-// New: JSX mapping
-{data.map(item => <div key={item.id}>{item}</div>)}
-```
-
-### 4. **Forms**
-```html
-<!-- HTML: for attribute -->
-<label for="email">Email</label>
-
-<!-- React: htmlFor attribute -->
-<label htmlFor="email">Email</label>
-```
-
-## Features Converted
-
-✅ Particle.js background with theme switching
-✅ Typewriter effect for job titles
-✅ Scroll progress bar
-✅ Image/video hover effect
-✅ Animated GPA counters
-✅ Swiper carousel for certifications
-✅ Theme toggle (dark/light mode)
-✅ Contact form (Formspree integration)
-✅ Responsive design
-✅ All animations and transitions
-
-## Swiper Integration
-
-The certification carousel uses Swiper React components:
-```javascript
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Keyboard } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
-
-<Swiper
-  modules={[Pagination, Keyboard]}
-  slidesPerView={1}
-  pagination={{ clickable: true }}
->
-  <SwiperSlide>Content</SwiperSlide>
-</Swiper>
-```
-
-## Particles.js Integration
-
-Particles.js is loaded from CDN and initialized via useEffect:
-```javascript
-useEffect(() => {
-  if (window.particlesJS) {
-    initParticles();
-  }
-}, []);
-```
-
-## Customization Tips
-
-### Adding New Sections
-1. Add to the JSX in `App.jsx`
-2. Style in `App.css`
-3. Use state for dynamic content
-
-### Changing Colors
-Edit CSS variables in `:root` and `.light-mode`:
-```css
-:root {
-  --bg-color: #020003;
-  --text-main: rgba(239, 194, 255, 0.8);
-  /* ... */
-}
-```
-
-### Adding New Certifications
-Just add to the `certifications` array:
-```javascript
-const certifications = [
-  { img: "path.svg", title: "Cert Name", issued: "Date" },
-  // Add more here
-];
-```
-
-## Deployment
-
-### Build for production
-```bash
-npm run build
-```
-
-This creates a `dist/` folder with optimized files.
-
-### Deploy to:
-- **Netlify**: Drag and drop `dist/` folder
-- **Vercel**: Connect GitHub repo
-- **GitHub Pages**: Use `gh-pages` branch
-- **AWS S3**: Upload `dist/` contents
-
-## Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers (iOS Safari, Chrome Mobile)
-
-## Performance Notes
-
-- Particles.js is destroyed/recreated on theme change to prevent memory leaks
-- Images and videos should be optimized before deployment
-- Consider lazy loading for images below the fold
-- Swiper is configured for optimal mobile performance
-
-## Troubleshooting
-
-### Particles not showing?
-- Check console for errors
-- Ensure particles.min.js is loaded from CDN
-- Verify `#particles-js` div exists
-
-### Swiper not working on mobile?
-- Check that Swiper CSS is imported
-- Verify breakpoints in Swiper config
-
-### Theme not persisting?
-- Check localStorage is enabled in browser
-- Verify theme state is synced with localStorage
-
-## Questions?
-
-If you need help customizing or have questions, feel free to ask!
+- **Line weight means something.** Thick lines frame sheets, medium lines draw objects, thin lines are
+  leaders and rules, dashed lines are planned work.
+- **Redline is markup only:** planned parts, the selected part of a figure, the value a chart is about.
+- **One animation:** Figure 1 draws itself once on load. Everything else only answers the visitor.
+  `prefers-reduced-motion` turns that animation off.
+- **Breakpoints:** one viewport breakpoint (narrow, under 768px). Components that depend on their own
+  width (the diagram, title block, lab layout, rack drawing) use container queries.
+- **The set scales with the window.** The root size is 16px up to a 1440px window and grows to 22px
+  at 2880px (`html` in `base.css`). Size things in rem, container-query thresholds included, so the
+  whole sheet grows together on big monitors. Line weights and SVG lettering (which scales with its
+  viewBox) are the only px values.
+- **Text never renders below 12px,** including SVG text after scaling.

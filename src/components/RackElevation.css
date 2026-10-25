@@ -1,0 +1,48 @@
+.rackfig { container-type: inline-size; }
+
+.rackfig__svg {
+  width: 100%;
+  max-width: 27.5rem;
+  height: auto;
+  margin: 0 auto;
+  font-family: var(--font-letter);
+  color: var(--ink);
+}
+
+.rk__frame { fill: none; stroke: var(--ink); stroke-width: 2.5; }
+.rk__rail { stroke: var(--ink); stroke-width: 1; }
+.rk__tick { stroke: var(--ink); stroke-width: 1; }
+.rk__u { font-size: 13.5px; fill: var(--ink-3); font-variant-numeric: tabular-nums; }
+.rk__lead { stroke: var(--redline); stroke-width: 1; stroke-dasharray: 3 3; }
+
+.rk rect { stroke-width: 1.5; }
+.rk.is-running rect { fill: var(--paper); stroke: var(--ink); }
+.rk.is-planned rect { fill: var(--redline-wash); stroke: var(--redline); stroke-dasharray: 6 4; }
+.rk.is-empty rect { fill: none; stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 2 4; }
+
+.rk__name { font-size: 15px; font-weight: 700; fill: var(--ink); }
+.rk__detail { font-size: 13.5px; fill: var(--ink-2); }
+.rk.is-empty .rk__name { fill: var(--ink-3); font-weight: 400; }
+.rk__flag { font-size: 13.5px; font-style: italic; fill: var(--redline); }
+
+.rk__dim line { stroke: currentColor; stroke-width: 1; }
+.rk__dimtext { font-size: 15px; font-weight: 700; fill: var(--ink); }
+.rk__dimtext--sub { font-size: 13.5px; font-weight: 400; fill: var(--ink-3); }
+
+.rk__floor { stroke: var(--ink); stroke-width: 2; }
+.rk__caster { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+
+.rackfig__legend { margin-top: 0.5rem; }
+
+/* The fine print is 13.5 units, so it falls under 12px on screen once the
+   drawing renders below ~89% scale, which happens when the figure is
+   narrower than ~424px (26.5rem). Below that, keep the names readable and
+   drop the fine print, which the tables beside the figure carry anyway. */
+@container (max-width: 26.5rem) {
+  .rk__name { font-size: 24px; }
+  .rk__detail,
+  .rk__flag,
+  .rk__u,
+  .rk__dimtext--sub { display: none; }
+  .rk__dimtext { font-size: 24px; }
+}

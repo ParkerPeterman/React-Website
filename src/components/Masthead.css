@@ -1,0 +1,78 @@
+.mast {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  margin-bottom: 1.75rem;
+  border-bottom: var(--w-frame) solid var(--ink);
+  background: var(--scrim);
+  backdrop-filter: blur(6px);
+  container: mast / inline-size;
+}
+
+.mast__inner {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+  width: min(100% - 2 * var(--gutter), var(--sheet-max));
+  min-height: 3.75rem;
+  margin: 0 auto;
+  font-family: var(--font-letter);
+  font-size: var(--fs-ui);
+}
+
+.mast__name {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.mast__nav ul { display: flex; gap: 1.5rem; }
+.mast__nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0;
+  color: var(--ink-2);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+.mast__nav a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+.mast__nav a[aria-current] { color: var(--ink); border-bottom-color: var(--redline); }
+
+.mast__aside {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-left: auto;
+}
+
+.mast__resume {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: 1px;
+  white-space: nowrap;
+}
+.mast__resume:hover { text-decoration-color: var(--redline); text-decoration-thickness: 2px; }
+
+/* Just above the narrow breakpoint the bar is a little too short for name,
+   sections, résumé link and switch on one row. Drop the résumé link there
+   (it's also in the title sheet and the contact sheet) instead of letting
+   the switch wrap onto a second row. */
+@container mast (max-width: 54rem) {
+  .mast__resume { display: none; }
+}
+
+@media (max-width: 767.98px) {
+  .mast__inner { gap: 0.25rem 1.25rem; padding-top: 0.5rem; }
+  .mast__nav { order: 3; width: 100%; }
+  .mast__nav ul { gap: 1rem; overflow-x: auto; scrollbar-width: none; }
+  .mast__resume { display: none; }
+}

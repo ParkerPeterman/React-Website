@@ -1,0 +1,184 @@
+/* Figure 1 — explorable system drawing */
+
+.sysfig { overflow: hidden; container: sysfig / inline-size; }
+
+/* --- Wide: the drawing ---------------------------------------------------- */
+
+.sysfig__drawing {
+  position: relative;
+  container-type: inline-size;
+  margin: 1.25rem 1.25rem 0.5rem;
+}
+
+.sysfig__lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.sysfig__edge {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+  transition: stroke var(--dur-quick) var(--ease);
+}
+.sysfig__edge.is-linked { stroke: var(--redline); stroke-width: 2; }
+
+.sysfig__head { fill: var(--ink); }
+.sysfig__head--hi { fill: var(--redline); }
+
+.sysfig__label {
+  font-family: var(--font-letter);
+  font-size: 15.5px; /* user units: renders 12–16px across the drawing range */
+  font-style: italic;
+  fill: var(--ink-3);
+}
+.sysfig__label.is-linked { fill: var(--ink); }
+
+.sysfig__node {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1px;
+  padding: 0 0.5em;
+  border: var(--w-object) solid var(--ink);
+  background: var(--paper-raise);
+  text-align: left;
+  font-family: var(--font-letter);
+  font-size: clamp(0.75rem, 1.3cqw, 0.875rem);
+  line-height: 1.2;
+  transition: background-color var(--dur-quick) var(--ease), border-color var(--dur-quick) var(--ease);
+}
+.sysfig__node:hover { background: var(--paper); border-width: var(--w-frame); }
+.sysfig__node.is-active {
+  border: var(--w-frame) solid var(--redline);
+  background: var(--redline-wash);
+  box-shadow: inset 0 0 0 1px var(--redline);
+}
+
+.sysfig__name { font-weight: 700; color: var(--ink); white-space: nowrap; }
+.sysfig__sub { font-size: 0.75rem; color: var(--ink-3); white-space: nowrap; }
+
+/* The one orchestrated moment on the site: a paper-coloured wipe slides off
+   the linework left to right (transform only), and the parts land column by
+   column behind it. Duration is the documented optical exception in
+   tokens.css; each part's own fade is the 300ms token. */
+.sysfig__wipe { display: none; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .sysfig__wipe {
+    display: block;
+    position: absolute;
+    inset: -0.25rem;
+    background: var(--paper-raise);
+    transform-origin: right center;
+    pointer-events: none;
+    animation: sysfig-wipe var(--dur-draw) var(--ease) 150ms both;
+  }
+  .sysfig__drawing .sysfig__node {
+    animation: sysfig-land var(--dur-base) var(--ease) both;
+    animation-delay: calc(150ms + var(--i, 0) * 125ms);
+  }
+}
+
+@keyframes sysfig-wipe {
+  from { transform: scaleX(1); }
+  to   { transform: scaleX(0); }
+}
+@keyframes sysfig-land {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* --- Narrow: stacked ------------------------------------------------------ */
+
+.sysfig__stack { display: none; }
+
+/* Switch to the stacked parts list when the figure itself is too narrow
+   for the drawing's lettering to stay at 12px or more. */
+@container sysfig (max-width: 52.4375rem) {
+  .sysfig__drawing { display: none; }
+
+  .sysfig__stack {
+    display: grid;
+    gap: 1rem;
+    padding: 1.25rem 1.25rem 0.5rem;
+  }
+  .sysfig__stack li { position: relative; }
+  /* connector into the next part */
+  .sysfig__stack li + li::before {
+    content: '';
+    position: absolute;
+    left: 1.375rem;
+    top: -0.875rem;
+    height: 0.875rem;
+    border-left: var(--w-object) solid var(--ink);
+  }
+  .sysfig__stack li.is-loop { margin-top: 0.75rem; }
+  .sysfig__stack li.is-loop::before { top: -1.5rem; height: 1.5rem; border-left-style: dashed; }
+
+  .sysfig__stack .sysfig__node {
+    position: static;
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.5rem 0.75rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;   /* name and note share a baseline */
+    align-content: center;   /* and the line sits mid-box */
+    justify-content: space-between;
+    gap: 0.75rem;
+    font-size: var(--fs-ui);
+  }
+}
+
+/* --- Detail note ---------------------------------------------------------- */
+
+.sysfig__note {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 0.75rem 2.25rem;
+  margin: 0.75rem 1.25rem 1.25rem;
+  padding: 1.25rem 1.25rem;
+  border: var(--w-object) solid var(--ink);
+  background: var(--paper);
+}
+
+.sysfig__notetitle {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: var(--fs-h3);
+}
+
+.sysfig__balloon {
+  width: 0.875rem;
+  height: 0.875rem;
+  border: 2px solid var(--redline);
+  border-radius: 50%;
+  background: var(--redline-wash);
+}
+
+.sysfig__does {
+  font-size: var(--fs-text);
+  color: var(--ink-2);
+}
+
+.sysfig__meta { display: grid; gap: 1rem; align-content: start; }
+.sysfig__meta dt { margin-bottom: 0.25rem; }
+.sysfig__meta dd { font-size: var(--fs-ui); line-height: 1.6; color: var(--ink-2); }
+.sysfig__meta dd.sysfig__code {
+  font-family: var(--font-letter);
+  font-size: var(--fs-ui);
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 767.98px) {
+  .sysfig__note { grid-template-columns: 1fr; margin: 0.5rem 0.75rem 0.75rem; padding: 1rem; }
+}

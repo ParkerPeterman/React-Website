@@ -1,0 +1,134 @@
+/* Sheet 1 — title sheet */
+
+.tsheet { margin-top: 0.5rem; container: tsheet / inline-size; }
+
+.tsheet__body { padding-bottom: calc(var(--pad) - 0.25rem); }
+
+.tsheet__lead {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 1.5rem 3.5rem;
+  align-items: end;
+  margin-bottom: 2rem;
+}
+
+.tsheet__statement {
+  font-family: var(--font-letter);
+  font-size: var(--fs-hero);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  max-width: 15ch;
+  color: var(--ink);
+}
+
+.tsheet__status { margin-bottom: 0.75rem; }
+.tsheet__status .status { font-weight: 700; color: var(--ink); }
+
+.tsheet__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+  margin-top: 1.25rem;
+}
+
+/* --------------------------------------------------------------------------
+   Title block — the drawing's identity panel, ruled into cells.
+   -------------------------------------------------------------------------- */
+
+.tblock {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 1.5fr 0.8fr 0.8fr;
+  grid-template-areas:
+    'name status contact sign sheet'
+    'name degree contact sign loc';
+  margin: 0 0.5rem 0.5rem;
+  border-top: var(--w-frame) solid var(--ink);
+}
+
+.tblock__cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+  padding: 0.75rem 1rem 0.75rem;
+  border-left: var(--w-thin) solid var(--ink);
+  border-top: var(--w-thin) solid var(--ink);
+  font-family: var(--font-letter);
+}
+
+.tblock__cell--name    { grid-area: name; border-left: 0; border-top: 0; justify-content: center; padding: 1rem 1.25rem; }
+.tblock__cell--status  { grid-area: status; border-top: 0; }
+.tblock__cell--degree  { grid-area: degree; }
+.tblock__cell--contact { grid-area: contact; border-top: 0; }
+.tblock__cell--sign    { grid-area: sign; border-top: 0; }
+.tblock__cell--sheet   { grid-area: sheet; border-top: 0; }
+.tblock__cell--loc     { grid-area: loc; }
+
+.tblock__name {
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+.tblock__role { font-size: var(--fs-ui); color: var(--ink-2); }
+
+.tblock__value { font-size: var(--fs-ui); font-weight: 700; line-height: 1.5; }
+.tblock__sub { font-size: var(--fs-label); color: var(--ink-2); }
+
+.tblock__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+.tblock__link:hover { text-decoration-color: var(--redline); }
+.tblock__links { display: flex; gap: 1rem; margin-top: 0.25rem; }
+.tblock__links .link { font-size: var(--fs-label); }
+
+/* The signature is a single-colour drawing; used as a mask it takes the
+   ink colour in either theme. */
+.tblock__signature {
+  flex: 1;
+  min-height: 2.875rem;
+  background: var(--ink);
+  -webkit-mask: url('/Logo.svg') center / contain no-repeat;
+  mask: url('/Logo.svg') center / contain no-repeat;
+}
+
+@container tsheet (max-width: 68.125rem) {
+  .tsheet__lead { grid-template-columns: 1fr; align-items: start; }
+  .tsheet__statement { max-width: 18ch; }
+
+  .tblock {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+      'name    name    name'
+      'status  degree  loc'
+      'contact contact sign'
+      'contact contact sheet';
+  }
+  .tblock__cell--name { border-bottom: 0; }
+  .tblock__cell--status { border-left: 0; border-top: var(--w-thin) solid var(--ink); }
+  .tblock__cell--contact { border-left: 0; border-top: var(--w-thin) solid var(--ink); }
+  .tblock__cell--sign { border-top: var(--w-thin) solid var(--ink); }
+  .tblock__cell--sheet { border-top: var(--w-thin) solid var(--ink); }
+}
+
+@container tsheet (max-width: 42.5rem) {
+  .tblock {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      'name    name'
+      'status  status'
+      'degree  loc'
+      'contact contact'
+      'sign    sheet';
+  }
+  .tblock__cell--degree { border-left: 0; }
+  .tblock__cell--sign { border-left: 0; }
+}

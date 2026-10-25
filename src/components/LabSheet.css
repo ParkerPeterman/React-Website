@@ -1,0 +1,44 @@
+/* Sheet 3 — Homelab */
+
+.lab__lede { margin-top: 0.75rem; }
+
+.lab {
+  display: grid;
+  grid-template-columns: minmax(28.75rem, 0.8fr) minmax(0, 1.2fr);
+  gap: 2rem 2.75rem;
+  align-items: start;
+}
+
+.lab__side { display: grid; gap: 1.5rem; justify-items: start; }
+.lab__side .table-scroll { width: 100%; }
+
+.lab__facts th[scope='row'] { white-space: nowrap; width: 1%; }
+.lab__facts td:last-child { width: 1%; }
+.lab__facts caption { padding: 0.75rem 0.75rem; }
+
+.lab__h { font-size: var(--fs-h3); margin-bottom: -0.5rem; }
+
+.lab__decisions { display: grid; gap: 0.75rem; max-width: 62ch; color: var(--ink-2); }
+.lab__decisions li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+/* a leader tick, not a bullet */
+.lab__decisions li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.8em;
+  width: 0.875rem;
+  border-top: var(--w-object) solid var(--ink);
+}
+
+@container sheet (max-width: 66.25rem) {
+  .lab { grid-template-columns: 1fr; }
+  .lab .rackfig { max-width: 30rem; width: 100%; justify-self: center; }
+}
+
+@media (max-width: 767.98px) {
+  .table-scroll .lab__facts th.is-cont { position: absolute; }
+  .table-scroll .lab__facts td:last-child { padding-top: 0.5rem; }
+}

@@ -1,0 +1,72 @@
+/* Sheet 2 — Work */
+
+.work__lede { margin-top: 0.75rem; }
+
+.proj {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 1.75rem 3rem;
+  align-items: start;
+  padding: 2rem 0;
+  border-top: var(--w-object) solid var(--ink);
+}
+
+.proj__kind { color: var(--ink-3); font-size: var(--fs-label); }
+.proj__title { font-size: var(--fs-h3); margin: 0.25rem 0 0.75rem; }
+.proj--featured .proj__title { font-size: 1.6rem; }
+.proj__summary { color: var(--ink-2); max-width: 56ch; }
+
+/* Facts read as a small ruled table: label above value, three across. */
+.proj__facts {
+  display: grid;
+  font-family: var(--font-letter);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 1.25rem 0 1rem;
+  border: var(--w-thin) solid var(--ink);
+}
+.proj__fact { padding: 0.5rem 0.75rem; }
+.proj__fact + .proj__fact { border-left: var(--w-thin) solid var(--ink); }
+.proj__facts dt,
+.proj__facts dd { padding: 0; border: 0; }
+.proj__facts dt { color: var(--ink-3); font-size: var(--fs-label); }
+.proj__facts dd { font-weight: 700; font-size: var(--fs-ui); line-height: 1.5; }
+
+.proj__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  font-family: var(--font-letter);
+  font-size: var(--fs-label);
+  color: var(--ink-2);
+}
+.proj__stack li::before { content: '+ '; color: var(--ink-3); }
+
+.proj__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  margin-top: 1.25rem;
+}
+.proj__norepo { color: var(--ink-3); font-size: var(--fs-label); }
+
+/* Featured screenshots: phone at true proportion beside the dashboard. */
+.proj__shots {
+  display: grid;
+  grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.work__rows .proj:last-child { padding-bottom: 0.25rem; }
+
+@media (max-width: 767.98px) {
+  .proj { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 767.98px) {
+  .proj__facts { grid-template-columns: 1fr; }
+  .proj__fact + .proj__fact { border-left: 0; border-top: var(--w-thin) solid var(--ink); }
+  .proj__shots { grid-template-columns: 1fr 1fr; }
+  .proj__shots .proj__wide { grid-column: 1 / -1; }
+}

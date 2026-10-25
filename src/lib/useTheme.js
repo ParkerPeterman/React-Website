@@ -4,43 +4,45 @@ const STORAGE_KEY = 'theme';
 
 /** The attribute is already set by the inline script in index.html. */
 const currentTheme = () =>
-  document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+  document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
 
 /**
- * Reads and writes the theme on <html>. An explicit choice is persisted and
- * wins from then on; until the visitor picks, the OS preference is followed
- * live so a system change is reflected without a reload.
+ * Reads and writes the theme on <html>: 'light' is paper, 'dark' is
+ * blueprint. An explicit choice is persisted and wins from then on; until the
+ * visitor picks, the OS preference is followed live.
  */
 export default function useTheme() {
-  const [theme, setTheme] = useState(currentTheme);
+  const [theme, setThemeState] = useState(currentTheme);
 
   const apply = useCallback((next) => {
     document.documentElement.dataset.theme = next;
-    setTheme(next);
+    setThemeState(next);
 
     // Keeps the mobile browser chrome in step with the page.
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) {
       meta.setAttribute(
         'content',
-        getComputedStyle(document.documentElement).getPropertyValue('--surface').trim()
+        getComputedStyle(document.documentElement).getPropertyValue('--paper').trim()
       );
     }
   }, []);
 
-  const toggle = useCallback(() => {
-    const next = currentTheme() === 'light' ? 'dark' : 'light';
-    try {
-      localStorage.setItem(STORAGE_KEY, next);
-    } catch {
-      // Private mode / storage disabled — the theme still applies for this session.
-    }
-    apply(next);
-  }, [apply]);
+  const setTheme = useCallback(
+    (next) => {
+      try {
+        localStorage.setItem(STORAGE_KEY, next);
+      } catch {
+        // Private mode / storage disabled — the theme still applies for this session.
+      }
+      apply(next);
+    },
+    [apply]
+  );
 
   // Follow the OS only while the visitor hasn't chosen for themselves.
   useEffect(() => {
-    const mq = window.matchMedia('(prefers-color-scheme: light)');
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
     const onChange = (e) => {
       let stored = null;
       try {
@@ -49,11 +51,11 @@ export default function useTheme() {
         stored = null;
       }
       if (stored === 'light' || stored === 'dark') return;
-      apply(e.matches ? 'light' : 'dark');
+      apply(e.matches ? 'dark' : 'light');
     };
     mq.addEventListener('change', onChange);
     return () => mq.removeEventListener('change', onChange);
   }, [apply]);
 
-  return { theme, toggle };
+  return { theme, setTheme };
 }

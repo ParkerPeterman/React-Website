@@ -1,0 +1,21 @@
+.skills__lede { margin-top: 0.75rem; }
+
+.parts { min-width: 42.5rem; }
+.parts th[scope='row'] { width: 20%; }
+.parts__spec { color: var(--ink-2); }
+.parts td:last-child { width: 24%; }
+
+.parts__used { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; }
+.parts__used a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  white-space: nowrap;
+}
+.parts__used a:hover { text-decoration-color: var(--redline); text-decoration-thickness: 2px; }
+
+.parts tbody tr:hover { background: var(--paper); }
+
+@media (max-width: 767.98px) {
+  .table-scroll .parts td:last-child { padding-top: 0.5rem; }
+}
